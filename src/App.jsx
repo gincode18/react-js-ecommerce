@@ -11,16 +11,16 @@ function App() {
     <div className="app">
      <Routes>
      <Route path="/checkout" element={<div className='app'><Header/><Checkout></Checkout></div>}></Route>
-      
+
       <Route path="/" element={ <div className="app">
       <Header/>
       <Home/>
       </div>}/>
-      
-      
+
+
       </Routes>
     </div>
-    
+
   );
 }
 
