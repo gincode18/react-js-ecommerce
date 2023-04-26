@@ -1,6 +1,6 @@
 import React from 'react'
-import './Checkout.css'
-import doodel from "./animedoodle3.gif"
+import './../Style/Checkout.css'
+import doodel from "./../Images/animedoodle3.gif"
 import Subtotal from './Subtotal'
 function Checkout() {
   return (

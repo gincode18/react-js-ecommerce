@@ -1,11 +1,11 @@
 import React from 'react'
-import "./Header.css";
-import logo from './logo.gif'
+import "./../Style/Header.css";
+import logo from './../Images/logo.gif'
 
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
-import searchgif from "./search.gif"
+import searchgif from "./../Images/search.gif"
 function Header() {
   return (
     <div className='header'>

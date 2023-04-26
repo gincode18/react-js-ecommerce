@@ -1,14 +1,14 @@
 import React from 'react'
-import './Homes.css'
-import home from './animedoodle2.gif'
+import './../Style/Homes.css'
+import home from './../Images/animedoodle2.gif'
 import Product from './Product';
-import shirt1 from "./animeshirt1.webp"
-import shirt3 from "./animeshirt2.webp"
+import shirt1 from "./../Images/animeshirt1.webp"
+import shirt3 from "./../Images/animeshirt2.webp"
 
-import shirt2 from "./animeshirt3.webp"
-import shirt4 from "./animeshirt4.webp"
-import shirt5 from "./animeshirt5.webp"
-import shirt6 from "./animeshirt6.webp"
+import shirt2 from "./../Images/animeshirt3.webp"
+import shirt4 from "./../Images/animeshirt4.webp"
+import shirt5 from "./../Images/animeshirt5.webp"
+import shirt6 from "./../Images/animeshirt6.webp"
 
 function Home() {
   return (
