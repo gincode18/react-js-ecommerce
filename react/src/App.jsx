@@ -6,6 +6,8 @@ import Home from "./Component/Home";
 import { Routes } from "react-router-dom";
 import Checkout from "./Component/Checkout";
 import { Space, Alert } from "antd";
+import Login from "./Component/Login";
+import ProductsList from "./features/product-list/ProductsList";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -31,6 +33,14 @@ function App() {
               <Header />
 
               <Home />
+            </div>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <div className="app">
+            <ProductsList></ProductsList>
             </div>
           }
         />

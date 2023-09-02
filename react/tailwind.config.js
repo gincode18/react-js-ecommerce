@@ -29,7 +29,7 @@ export default {
 
           neutral: "#2a323c",
 
-          "base-100": "#1d232a",
+          "base-100": "#1d1e1f",
 
           info: "#3abff8",
 
@@ -42,5 +42,5 @@ export default {
       },
     ],
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),require('@tailwindcss/forms') ,require('@tailwindcss/aspect-ratio'),],
 };
