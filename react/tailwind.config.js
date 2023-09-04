@@ -40,6 +40,7 @@ export default {
           error: "#f87272",
         },
       },
+      "dark",
     ],
   },
   plugins: [require("daisyui"),require('@tailwindcss/forms') ,require('@tailwindcss/aspect-ratio'),],

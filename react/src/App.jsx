@@ -8,6 +8,8 @@ import Checkout from "./Component/Checkout";
 import { Space, Alert } from "antd";
 import Login from "./Component/Login";
 import ProductsList from "./features/product-list/ProductsList";
+import Navbar from "./features/navbar/Navbar";
+import ProductFilter from "./features/ProductFilter/ProductFilter";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -40,7 +42,19 @@ function App() {
           path="/login"
           element={
             <div className="app">
-            <ProductsList></ProductsList>
+              <Login></Login>
+            </div>
+          }
+        />
+        <Route
+          path="/test"
+          element={
+            <div className="app">
+             <Navbar>
+             <ProductFilter>
+                <ProductsList></ProductsList>
+              </ProductFilter>
+             </Navbar>
             </div>
           }
         />
