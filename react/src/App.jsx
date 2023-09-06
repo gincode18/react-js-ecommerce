@@ -10,6 +10,8 @@ import Login from "./Component/Login";
 import ProductsList from "./features/product-list/ProductsList";
 import Navbar from "./features/navbar/Navbar";
 import ProductFilter from "./features/ProductFilter/ProductFilter";
+import SignUP from "./Component/SignUp";
+import Cart from "./features/cart/Cart";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -47,14 +49,30 @@ function App() {
           }
         />
         <Route
+          path="/signin"
+          element={
+            <div className="app">
+              <SignUP></SignUP>
+            </div>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <div className="app">
+              <Cart></Cart>
+            </div>
+          }
+        />
+        <Route
           path="/test"
           element={
             <div className="app">
-             <Navbar>
-             <ProductFilter>
-                <ProductsList></ProductsList>
-              </ProductFilter>
-             </Navbar>
+              <Navbar>
+                <ProductFilter>
+                  <ProductsList></ProductsList>
+                </ProductFilter>
+              </Navbar>
             </div>
           }
         />
