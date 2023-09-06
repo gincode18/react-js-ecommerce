@@ -1,7 +1,6 @@
 .product{
     display: flex;
     flex-direction: column;
-    background-color:rgb(47, 47, 47);
     z-index: 1;
     align-items: center;
     justify-content: flex-end;
