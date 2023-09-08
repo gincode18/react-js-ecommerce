@@ -4,19 +4,19 @@ function Logo() {
   return (
     <svg
     xmlns="http://www.w3.org/2000/svg"
-     className=' h-20 w-20 '
+     className=' group hover:bg-inherit h-20 w-20 '
     viewBox="0 0 100 100"
   >
-    <circle className="fill-primary"  cx="13" cy="29" r="2" fill="#78a0cf"></circle>
-    <circle className=" fill-accent"cx="77" cy="13" r="1" fill="#f1bc19"></circle>
-    <circle className="fill-primary" cx="50" cy="50" r="37" fill=""></circle>
-    <circle className=" fill-secondary"cx="83" cy="15" r="4" fill="#f1bc19"></circle>
-    <circle className="fill-primary" cx="87" cy="24" r="2" fill=""></circle>
+    <circle className="fill-primary group-hover:fill-secondary  ease-out duration-700"  cx="13" cy="29" r="2" fill="#78a0cf"></circle>
+    <circle className="fill-accent"cx="77" cy="13" r="1" fill="#f1bc19"></circle>
+    <circle className="fill-primary group-hover:fill-secondary  ease-out duration-700 " cx="50" cy="50" r="37" fill=""></circle>
+    <circle className="fill-secondary group-hover:fill-primary  ease-out duration-700"cx="83" cy="15" r="4" fill="#f1bc19"></circle>
+    <circle className="fill-primary group-hover:fill-secondary  ease-out duration-700" cx="87" cy="24" r="2" fill=""></circle>
     <circle className="fill-accent" cx="81" cy="76" r="2" fill="#fbcd59"></circle>
-    <circle className="fill-secondary" cx="15" cy="63" r="4" fill="#fbcd59"></circle>
-    <circle className="fill-primary" cx="25" cy="87" r="2" fill="#78a0cf"></circle>
+    <circle className="fill-secondary group-hover:fill-primary  ease-out duration-700" cx="15" cy="63" r="4" fill="#fbcd59"></circle>
+    <circle className="fill-primary group-hover:fill-secondary  ease-out duration-700" cx="25" cy="87" r="2" fill="#78a0cf"></circle>
     <circle className="fill-accent"cx="18.5" cy="53.5" r="2.5" fill="#fff"></circle>
-    <circle className="fill-secondary"cx="21" cy="67" r="1" fill="#f1bc19"></circle>
+    <circle className="fill-secondary group-hover:fill-primary  ease-out duration-700"cx="21" cy="67" r="1" fill="#f1bc19"></circle>
     <circle className="fill-accent"cx="80" cy="34" r="1" fill="#fff"></circle>
     <path
       fill="#ddf2f1"
@@ -81,12 +81,12 @@ function Logo() {
       d="M42.072,60.121c-1.254,2.401-1.145,5.961-1.145,5.961l1.652,1.229 C42.579,67.311,41.71,61.255,42.072,60.121z"
     ></path>
     <path
-    className="fill-secondary"
+    className="fill-secondary group-hover:fill-primary  ease-out duration-700"
       fill="#6ee7ea"//eyes
       d="M42.592,46.707c1.174,0.554,5.601,4.834,5.601,4.834l-0.342,0.391c0,0-2.736-2.283-6.137-3.905 L42.592,46.707z"
     ></path>
     <path
-      className="fill-secondary"
+      className="fill-secondary group-hover:fill-primary  ease-out duration-700"
       d="M50,51.321c0.81-0.122,5.201-2.519,7.285-4.158l-0.23,2.005c0,0-1.648,0.122-3.996,1.418 c-2.348,1.296-2.91,1.345-2.91,1.345L50,51.321z"
     ></path>
     <polygon
@@ -135,59 +135,59 @@ function Logo() {
     ></path>
     <path
       fill="#6ee7ea"
-      className="fill-secondary"
+      className="fill-secondary group-hover:fill-primary  ease-out duration-700"
       d="M59.928,54.725l3.158-0.836L61.293,53c0,0,3.359,0.345,8.266-3.186 c-1.484-0.58-3.897-0.527-3.897-0.527s5.592-3.225,6.554-4.45L72.402,33.7c0-3.314-2.686-6-6-6H33.493 c-2.428,0-4.523,1.443-5.466,3.522c-0.335,0.738,2.827,8.555,3.829,9.362c-0.807,0.929-1.602,5.564-1.467,7.753l1.846-1.63 c0,0,3.42,3.094,5.976,4.226c-0.843-0.04-2.89-0.193-2.89-0.193s2.601,2.024,6.024,2.929c-0.856-1.749-1.321-3.754-1.321-3.754 s3.558-6.76,10.376-9.048c0.518,0.499,1.107,1.7,1.107,1.7s1.602-2.12,2.923-2.35c0,0,4.674,3.644,2.496,9.368 c0.862-0.459,2.086-1.605,3.521-3.969c0,0,2.925,1.272,2.75,5.201C59.446,53.717,59.928,54.725,59.928,54.725z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M57.552,27.766h-2.336c-0.856,1.59-1.912,5.701-1.716,8.807c2.323-1.957,3.974-0.787,3.974-0.787 C57.013,34.486,57.226,29.951,57.552,27.766z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M61.293,41.388l-0.209,2.098c0,0,1.415,0.145,2.491,3.014 C63.397,45.141,63.136,42.649,61.293,41.388z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M56.288,36.842c0,0-1.639-0.098-3.081,1.003l-0.709,2.128c0.758-1.296,2.634-1.715,2.845-1.696 c0.345,0.032,2.299,1.011,3.818,5.314C59.674,37.73,56.288,36.842,56.288,36.842z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M49.685,32.88c-5.217,0.864-7.878,6.712-7.878,6.712s4.941-4.657,7.699-4.501 c1.287,0.072,3.158,2.598,3.158,2.598C52.757,34.054,49.685,32.88,49.685,32.88z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M60.348,37.967c1.59-2.299,4.084-7.745,4.084-7.745c-1.541,2.152-4.355,2.412-4.355,2.412 L59.26,36.84L60.348,37.967z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M65.47,46.707c4.097-2.207,5.83-6.122,5.83-6.122c-1.993,1.541-5.204,2.132-5.204,2.132 l-1.172,0.875L65.47,46.707z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M63.501,40.749c3.579-5.618,4.062-11.317,4.062-11.317c-2.641,6.432-6.774,9.709-6.774,9.709 l-0.047,0.604C60.741,39.745,62.716,38.958,63.501,40.749z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M45.772,32.361c0,0,0.554-1.866-1.549-4.484l2.887,0.097c0,0,3.945,2.559,5.388,7.303 C50.663,32.196,48.589,31.849,45.772,32.361z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M30.412,30.504c0,0,0.783,5.282,3.028,7.678L37,35.493C33.315,33.859,30.412,30.504,30.412,30.504z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M33.706,40.584c0,0,2.047-1.885,6.025-2.91l0.611-1.198C36.698,36.647,33.706,40.584,33.706,40.584z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M32.5,44.293c0,0,2.723-2.356,5.886-3.66l0.919-1.882C34.913,40.438,32.5,44.293,32.5,44.293z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M38.158,48.207c-2.641-1.924-2.837-3.717-2.837-3.717l-1.556,0.848 c0.955,2.755,4.507,4.011,4.507,4.011L38.158,48.207z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M40.408,27.876l-1.92,0.098c0,0,2.287,2.397,3.016,6.923l3.182-2.474 C44.686,32.424,42.3,28.879,40.408,27.876z"
     ></path>
     <path
@@ -195,7 +195,7 @@ function Logo() {
       d="M40.197,50.314c0,0-0.906,1.985-1.04,2.498l1.962,0.932L40.197,50.314z"
     ></path>
     <path
-      className="fill-primary"
+      className="fill-primary group-hover:fill-secondary  ease-out duration-700"
       d="M40.117,47c4.016-6.44,9.883-11.258,12.241-7.408l0.399-1.771C49.26,32.587,40.978,42.761,40.117,47 z"
     ></path>
     <path
