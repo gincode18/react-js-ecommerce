@@ -1,13 +1,13 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import logo from "../../Images/logo.gif";
+import Logo from "../../Logo";
 import { theme } from "antd";
 import { Link } from "react-router-dom";
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
-  imageUrl: "./public/download.jpeg",
+  imageUrl: "./download.jpeg",
 };
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -36,12 +36,8 @@ export default function Navbar({ children }) {
               <div className=" max-w-full px-4 sm:px-6 lg:px-8 ">
                 <div className="flex h-16 items-center  justify-between ">
                   <div className="flex items-center justify-start">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-9 w-9 mix-blend-color-dodge "
-                        src={logo}
-                        alt="Your Company"
-                      />
+                    <div className=" ml-[-8%]">
+                      <Logo></Logo>
                     </div>
                     {/* <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
