@@ -52,9 +52,9 @@ function Home() {
   ];
 
   return (
-    <div className="flex bg-gradient-to-r  from-primary   to-secondary">
+    <div className="flex  bg-gradient-to-r  from-primary   to-secondary">
       <div className=" w-[100%]">
-        <img className="home_image w-[100%] lg:h-[15%] " src={home} alt="banner"></img>
+        <img className=" home_image w-[100%] lg:h-[15%] " src={home} alt="banner"></img>
 
         <div className=" flex lg:flex-row md:flex-col sm:flex-col  sm:m-8">
           <Product
@@ -70,7 +70,7 @@ function Home() {
             rating={4}
           ></Product>
         </div>
-        {isDesktop ? (
+
           <div className="flex  lg:flex-row md:flex-col sm:flex-col ">
             <Product
               title="
@@ -92,41 +92,7 @@ Ultimate Susanoo: Kamui Shuriken Hoodie (Oversize Drop-Shoulder)"
               rating={4}
             ></Product>
           </div>
-        ) : (
-          <div className="pl-[10%]  pr-[10%]">
-            <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
-              <div className="carousel-item">
-                <div className="p-[100px]"> </div>
-                <Product
-                  title="Game Of Deaths Hoodie (Oversize Drop-Shoulder)"
-                  image={shirt1}
-                  price={29.9}
-                  rating={5}
-                ></Product>
-                <Product
-                  title="Game Of Deaths Hoodie (Oversize Drop-Shoulder)"
-                  image={shirt1}
-                  price={29.9}
-                  rating={5}
-                ></Product>
-                <Product
-                  title="Game Of Deaths Hoodie (Oversize Drop-Shoulder)"
-                  image={shirt1}
-                  price={29.9}
-                  rating={5}
-                ></Product>
-                <Product
-                  title="Game Of Deaths Hoodie (Oversize Drop-Shoulder)"
-                  image={shirt1}
-                  price={29.9}
-                  rating={5}
-                ></Product>
-                <div className="p-[100px]"> </div>
-              </div>
-            </div>
-          </div>
-        )}
-
+        
         <div className="flex">
           <Product
             title="Itadori Jujutsu Uniform"

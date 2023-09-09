@@ -30,7 +30,7 @@ export default function Navbar({ children }) {
   return (
     <>
       <div className="min-h-full">
-        <Disclosure as="nav" className=" bg-base-100 fixed z-50 w-full">
+        <Disclosure as="nav" className=" bg-base-100 bg-opacity-40 backdrop-filter backdrop-blur-3xl fixed z-50 w-full">
           {({ open }) => (
             <>
               <div className=" max-w-full px-4 sm:px-6 lg:px-8 ">

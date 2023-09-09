@@ -1,12 +1,12 @@
 import React from "react";
 
-
 function Product({ title, image, price, rating }) {
   return (
-    <div className=" min-h-[700px] min-w-[100px] product flex flex-col items-center justify-center bg-base-100  m-3 p-6 w-full">
-      <div className="card w-96 h-[500px] shadow-2xl shadow-primary hover:shadow-secondary  hover:image-full focus:image-full bg-base-300  group hover:text-inherit ">
+    <div className="  max-h-[800px]  w-full m-6 flex justify-center items-center">
+      <div className="  min-h-[700px] min-w-[100px]  bg-base-300  rounded-3xl w-full bg-opacity-50  backdrop-filter  backdrop-blur-lg"></div>
+      <div className="  absolute  bg-base-100 bg-opacity-40 backdrop-filter backdrop-blur-lg card w-96 rounded-3xl h-[500px] shadow-2xl shadow-primary hover:shadow-secondary   hover:image-full focus:image-full   group hover:text-inherit   ">
         <figure className=" ">
-          <img className=" z-20 " src={image} alt={title} />
+          <img className="  " src={image} alt={title} />
         </figure>
         <div className="card-body">
           <h2
