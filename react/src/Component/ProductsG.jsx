@@ -1,22 +1,24 @@
 import React from "react";
-
+import "./../Style/Product.css";
 
 function Product({ title, image, price, rating }) {
   return (
-    <div className=" min-h-[700px] min-w-[100px] product flex flex-col items-center justify-center bg-base-100  m-3 p-6 w-full">
-      <div className="card w-96 h-[500px] shadow-2xl shadow-primary hover:shadow-secondary  hover:image-full focus:image-full bg-base-300  group hover:text-inherit ">
+    <div className=" h-[700px] m-4">
+      <div className=" min-w-[500px] bg-base-100  h-[100%]  w-full    opacity-50"></div>
+      <div className=" relative bot left-[10%] card w-96 h-[600px] shadow-2xl  z-20 shadow-primary hover:shadow-secondary hover:image-full focus:image-full   backdrop-blur-3xl  group hover:text-inherit  ">
         <figure className=" ">
           <img className=" z-20 " src={image} alt={title} />
         </figure>
-        <div className="card-body">
+        <div className="card-body ">
           <h2
             className="card-title font-bold text-inherit 
-          group-hover:bg-gradient-to-r  group-hover:from-primary  group-hover:to-secondary group-hover:inline-block group-hover:text-transparent group-hover:bg-clip-text transition-colors  delay-75"
+          group-hover:bg-gradient-to-r  group-hover:from-primary  group-hover:to-secondary group-hover:inline-block group-hover:text-transparent group-hover:bg-clip-text transition-colors  
+          delay-75 "
           >
             {title}
           </h2>
           <p className="">
-            <small className="group-hover:bg-gradient-to-r  group-hover:from-primary  group-hover:to-secondary group-hover:inline-block group-hover:text-transparent group-hover:bg-clip-text transition-colors  delay-75">
+            <small className="group-hover:bg-gradient-to-r  group-hover:from-primary  group-hover:to-secondary group-hover:inline-block group-hover:text-transparent group-hover:bg-clip-text transition-colors  delay-75 ">
               $
             </small>
             <strong className="group-hover:bg-gradient-to-b  group-hover:from-primary  group-hover:to-secondary group-hover:inline-block group-hover:text-transparent group-hover:bg-clip-text transition-colors  delay-75">
