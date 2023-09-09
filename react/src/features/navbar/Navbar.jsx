@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "../../Logo";
+import Logo from "../../Component/Logo";
 import { theme } from "antd";
 import { Link } from "react-router-dom";
 const user = {
