@@ -4,7 +4,7 @@ import "./Style/App.css";
 import Header from "./Component/Header";
 import Home from "./Component/Home";
 import { Routes } from "react-router-dom";
-import Checkout from "./Component/Checkout";
+import Checkoutold from "./Component/Checkoutold";
 import { Space, Alert } from "antd";
 import Login from "./Component/Login";
 import ProductsList from "./features/product-list/ProductsList";
@@ -13,6 +13,7 @@ import ProductFilter from "./features/ProductFilter/ProductFilter";
 import SignUP from "./Component/SignUp";
 import Cart from "./features/cart/Cart";
 import ThemeChanger from "./Component/ThemeChanger";
+import Checkout from "./Component/Checkout";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -61,7 +62,7 @@ function App() {
           element={
             <div className="app">
               <Header />
-              <Checkout></Checkout>
+              <Checkoutold></Checkoutold>
             </div>
           }
         ></Route>
@@ -129,7 +130,7 @@ function App() {
           path="/test2"
           element={
             <div className="app">
-              <ThemeChanger></ThemeChanger>
+             <Checkout></Checkout>
             </div>
           }
         />

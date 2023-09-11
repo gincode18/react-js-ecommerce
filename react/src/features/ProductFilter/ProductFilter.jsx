@@ -1,87 +1,117 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from 'react'
-import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+import { Fragment, useState } from "react";
+import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronDownIcon,
+  FunnelIcon,
+  MinusIcon,
+  PlusIcon,
+  Squares2X2Icon,
+} from "@heroicons/react/20/solid";
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
-]
-const subCategories = [
-  { name: 'Totes', href: '#' },
-  { name: 'Backpacks', href: '#' },
-  { name: 'Travel Bags', href: '#' },
-  { name: 'Hip Bags', href: '#' },
-  { name: 'Laptop Sleeves', href: '#' },
-]
+  { name: "Most Popular", href: "#", current: true },
+  { name: "Best Rating", href: "#", current: false },
+  { name: "Newest", href: "#", current: false },
+  { name: "Price: Low to High", href: "#", current: false },
+  { name: "Price: High to Low", href: "#", current: false },
+];
+
 const filters = [
   {
-    id: 'color',
-    name: 'Color',
+    id: "category",
+    name: "Category",
     options: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
+      { value: "smartphones", label: "Smartphones", checked: false },
+      { value: "laptops", label: "Laptops", checked: false },
+      { value: "fragrances", label: "Fragrances", checked: false },
+      { value: "skincare", label: "Skincare", checked: false },
+      { value: "groceries", label: "Groceries", checked: false },
+      { value: "home-decoration", label: "Home Decoration", checked: false },
+      { value: "furniture", label: "Furniture", checked: false },
+      { value: "tops", label: "Tops", checked: false },
+      { value: "womens-dresses", label: "Women's Dresses", checked: false },
+      { value: "womens-shoes", label: "Women's Shoes", checked: false },
+      { value: "mens-shirts", label: "Men's Shirts", checked: false },
+      { value: "mens-shoes", label: "Men's Shoes", checked: false },
+      { value: "mens-watches", label: "Men's Watches", checked: false },
+      { value: "womens-watches", label: "Women's Watches", checked: false },
+      { value: "womens-bags", label: "Women's Bags", checked: false },
+      { value: "womens-jewellery", label: "Women's Jewellery", checked: false },
+      { value: "sunglasses", label: "Sunglasses", checked: false },
+      { value: "automotive", label: "Automotive", checked: false },
+      { value: "motorcycle", label: "Motorcycle", checked: false },
+      { value: "lighting", label: "Lighting", checked: false },
     ],
   },
   {
-    id: 'category',
-    name: 'Category',
+    id: "brnad",
+    name: "Brand",
     options: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
+      { value: "apple", label: "Apple", checked: false },
+      { value: "samsung", label: "Samsung", checked: false },
+      { value: "oppo", label: "OPPO", checked: false },
+      { value: "huawei", label: "Huawei", checked: false },
+      {
+        value: "microsoft_surface",
+        label: "Microsoft Surface",
+        checked: false,
+      },
+      { value: "infinix", label: "Infinix", checked: false },
+      { value: "hp_pavilion", label: "HP Pavilion", checked: false },
+      {
+        value: "impression_of_acqua_di_gio",
+        label: "Impression of Acqua Di Gio",
+        checked: false,
+      },
+      { value: "royal_mirage", label: "Royal_Mirage", checked: false },
+      {
+        value: "fog_scent_xpressio",
+        label: "Fog Scent Xpressio",
+        checked: false,
+      },
+      { value: "al_munakh", label: "Al Munakh", checked: false },
+      { value: "lord_-_al-rehab", label: "Lord - Al-Rehab", checked: false },
+      { value: "l'oreal_paris", label: "L'Oreal Paris", checked: false },
+      { value: "hemani_tea", label: "Hemani Tea", checked: false },
+      { value: "dermive", label: "Dermive", checked: false },
+      { value: "rorec_white_rice", label: "ROREC White Rice", checked: false },
+      { value: "fair_&_clear", label: "Fair & Clear", checked: false },
+      { value: "saaf_&_khaas", label: "Saaf & Khaas", checked: false },
+      { value: "bake_parlor_big", label: "Bake Parlor Big", checked: false },
+      {
+        value: "baking_food_items",
+        label: "Baking Food Items",
+        checked: false,
+      },
+      { value: "fauji", label: "fauji", checked: false },
+      { value: "dry_rose", label: "Dry Rose", checked: false },
+      { value: "boho_decor", label: "Boho Decor", checked: false },
+      { value: "flying_wooden", label: "Flying Wooden", checked: false },
+      { value: "led_lights", label: "LED Lights", checked: false },
+      { value: "luxury_palace", label: "luxury palace", checked: false },
+      { value: "golden", label: "Golden", checked: false },
     ],
   },
-  {
-    id: 'size',
-    name: 'Size',
-    options: [
-      { value: '2l', label: '2L', checked: false },
-      { value: '6l', label: '6L', checked: false },
-      { value: '12l', label: '12L', checked: false },
-      { value: '18l', label: '18L', checked: false },
-      { value: '20l', label: '20L', checked: false },
-      { value: '40l', label: '40L', checked: true },
-    ],
-  },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductFilter({children}) {
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+export default function ProductFilter({ children }) {
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
     <div className="">
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-          <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
+          <Dialog
+            as="div"
+            className="relative z-40 lg:hidden"
+            onClose={setMobileFiltersOpen}
+          >
             <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
@@ -120,28 +150,31 @@ export default function ProductFilter({children}) {
                   {/* Filters */}
                   <form className="mt-4 border-t  bg-base-100 border-gray-200">
                     <h3 className="sr-only">Categories</h3>
-                    <ul role="list" className="px-2 py-3 font-medium text-white">
-                      {subCategories.map((category) => (
-                        <li key={category.name}>
-                          <a href={category.href} className="block px-2 py-3">
-                            {category.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
 
                     {filters.map((section) => (
-                      <Disclosure as="div" key={section.id} className="border-t border-gray-200 px-4 py-6">
+                      <Disclosure
+                        as="div"
+                        key={section.id}
+                        className="border-t border-gray-200 px-4 py-6"
+                      >
                         {({ open }) => (
                           <>
                             <h3 className="-mx-2 -my-3 flow-root">
                               <Disclosure.Button className="flex w-full items-center justify-between  px-2 py-3 text-white hover:text-primary">
-                                <span className="font-medium  text-white">{section.name}</span>
+                                <span className="font-medium  text-white">
+                                  {section.name}
+                                </span>
                                 <span className="ml-6 flex items-center">
                                   {open ? (
-                                    <MinusIcon className="h-5 w-5" aria-hidden="true" />
+                                    <MinusIcon
+                                      className="h-5 w-5"
+                                      aria-hidden="true"
+                                    />
                                   ) : (
-                                    <PlusIcon className="h-5 w-5" aria-hidden="true" />
+                                    <PlusIcon
+                                      className="h-5 w-5"
+                                      aria-hidden="true"
+                                    />
                                   )}
                                 </span>
                               </Disclosure.Button>
@@ -149,7 +182,10 @@ export default function ProductFilter({children}) {
                             <Disclosure.Panel className="pt-6">
                               <div className="space-y-6">
                                 {section.options.map((option, optionIdx) => (
-                                  <div key={option.value} className="flex items-center">
+                                  <div
+                                    key={option.value}
+                                    className="flex items-center"
+                                  >
                                     <input
                                       id={`filter-mobile-${section.id}-${optionIdx}`}
                                       name={`${section.id}[]`}
@@ -157,6 +193,7 @@ export default function ProductFilter({children}) {
                                       type="checkbox"
                                       defaultChecked={option.checked}
                                       className="h-4 w-4 rounded border-gray-300  text-primary focus:text-primary"
+                                      onChange={()=>{console.log(option.value);}}
                                     />
                                     <label
                                       htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -181,7 +218,9 @@ export default function ProductFilter({children}) {
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-            <h1 className="text-4xl font-bold tracking-tight text-white">New Arrivals</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-white">
+              New Arrivals
+            </h1>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
@@ -212,10 +251,13 @@ export default function ProductFilter({children}) {
                             <a
                               href={option.href}
                               className={classNames(
-                                option.current ? 'font-medium  text-white' : 'text-secondary',
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm'
+                                option.current
+                                  ? "font-medium  text-white"
+                                  : "text-secondary",
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm"
                               )}
+                              onClick={ ()=>{console.log(option.name);}}
                             >
                               {option.name}
                             </a>
@@ -227,7 +269,10 @@ export default function ProductFilter({children}) {
                 </Transition>
               </Menu>
 
-              <button type="button" className="-m-2 ml-5 p-2 View grid hover:text-primary sm:ml-7">
+              <button
+                type="button"
+                className="-m-2 ml-5 p-2 View grid hover:text-primary sm:ml-7"
+              >
                 <span className="sr-only">View grid</span>
                 <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
               </button>
@@ -251,26 +296,31 @@ export default function ProductFilter({children}) {
               {/* Filters */}
               <form className="hidden lg:block">
                 <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-white">
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href}>{category.name}</a>
-                    </li>
-                  ))}
-                </ul>
 
                 {filters.map((section) => (
-                  <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
+                  <Disclosure
+                    as="div"
+                    key={section.id}
+                    className="border-b border-gray-200 py-6"
+                  >
                     {({ open }) => (
                       <>
                         <h3 className="-my-3 flow-root">
                           <Disclosure.Button className="flex w-full items-center justify-between  py-3 text-sm  text-white hover:text-primary">
-                            <span className="font-medium text-white">{section.name}</span>
+                            <span className="font-medium text-white">
+                              {section.name}
+                            </span>
                             <span className="ml-6 flex items-center">
                               {open ? (
-                                <MinusIcon className="h-5 w-5" aria-hidden="true" />
+                                <MinusIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
                               ) : (
-                                <PlusIcon className="h-5 w-5" aria-hidden="true" />
+                                <PlusIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
                               )}
                             </span>
                           </Disclosure.Button>
@@ -278,7 +328,10 @@ export default function ProductFilter({children}) {
                         <Disclosure.Panel className="pt-6">
                           <div className="space-y-4">
                             {section.options.map((option, optionIdx) => (
-                              <div key={option.value} className="flex items-center">
+                              <div
+                                key={option.value}
+                                className="flex items-center"
+                              >
                                 <input
                                   id={`filter-${section.id}-${optionIdx}`}
                                   name={`${section.id}[]`}
@@ -286,6 +339,7 @@ export default function ProductFilter({children}) {
                                   type="checkbox"
                                   defaultChecked={option.checked}
                                   className="h-4 w-4 rounded border-gray-300  text-primary focus:text-primary"
+                                  onChange={()=>{console.log(option.value);}}
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -310,5 +364,5 @@ export default function ProductFilter({children}) {
         </main>
       </div>
     </div>
-  )
+  );
 }
