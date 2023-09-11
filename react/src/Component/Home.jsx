@@ -52,11 +52,11 @@ function Home() {
   ];
 
   return (
-    <div className="flex  bg-gradient-to-r  from-primary   to-secondary">
+    <div className="flex bg-gradient-to-tr  from-accent  via-primary to-secondary ">
       <div className=" w-[100%]">
         <img className=" home_image w-[100%] lg:h-[15%] " src={home} alt="banner"></img>
 
-        <div className=" flex lg:flex-row md:flex-col sm:flex-col  sm:m-8">
+        <div className=" flex lg:flex-row md:flex-col sm:flex-col  ">
           <Product
             title="Game Of Deaths Hoodie (Oversize Drop-Shoulder)"
             image={shirt1}
@@ -101,7 +101,7 @@ Ultimate Susanoo: Kamui Shuriken Hoodie (Oversize Drop-Shoulder)"
             rating={5}
           ></Product>
         </div>
-      </div>
+      </div>   
     </div>
   );
 }

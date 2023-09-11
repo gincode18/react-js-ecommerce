@@ -9,7 +9,7 @@ import { Space, Alert } from "antd";
 import Login from "./Component/Login";
 import ProductsList from "./features/product-list/ProductsList";
 import Navbar from "./features/navbar/Navbar";
-import ProductFilter from "./features/ProductFilter/ProductFilter";
+import ProductFilter from "./features/product-list/ProductFilter";
 import SignUP from "./Component/SignUp";
 import Cart from "./features/cart/Cart";
 import ThemeChanger from "./Component/ThemeChanger";
@@ -55,7 +55,7 @@ function App() {
     console.log(theme);
   }, [theme]);
   return (
-    <div data-theme={theme} className="app bg-base-300 ease-out duration-700">
+    <div data-theme={theme} className="app  ease-out duration-700">
       <Routes>
         <Route
           path="/checkout"
@@ -73,7 +73,7 @@ function App() {
             <div className="app">
               <Navbar></Navbar>
               <label
-                className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75"
+                className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
                 onClick={() => {
                   const randomNumber = Math.floor(Math.random() * 27) + 1;
                   console.log(randomNumber);

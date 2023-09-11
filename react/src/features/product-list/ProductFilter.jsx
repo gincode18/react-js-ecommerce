@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
@@ -8,6 +8,8 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductAsync ,fetchProductAsyncFilter} from '../product-list/productSlice';
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -45,7 +47,7 @@ const filters = [
     ],
   },
   {
-    id: "brnad",
+    id: "brand",
     name: "Brand",
     options: [
       { value: "apple", label: "Apple", checked: false },
@@ -100,8 +102,17 @@ function classNames(...classes) {
 }
 
 export default function ProductFilter({ children }) {
+  const handleFilter=(e,section,option)=>{
+    const x={...filterdata,[section.id]:section.id==='brand'?option.label:option.value}
+    setfilterdata(x)
+  }
+  const dispatch=useDispatch()
+  const [filterdata, setfilterdata] = useState({})
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
+useEffect(()=>{
+  console.log(filterdata);
+  dispatch(fetchProductAsyncFilter(filterdata))
+},[filterdata])
   return (
     <div className="">
       <div>
@@ -193,7 +204,8 @@ export default function ProductFilter({ children }) {
                                       type="checkbox"
                                       defaultChecked={option.checked}
                                       className="h-4 w-4 rounded border-gray-300  text-primary focus:text-primary"
-                                      onChange={()=>{console.log(option.value);}}
+                                      onChange={(e)=>{handleFilter(e,section,option)}}
+                                      value={section.checked}
                                     />
                                     <label
                                       htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -339,7 +351,7 @@ export default function ProductFilter({ children }) {
                                   type="checkbox"
                                   defaultChecked={option.checked}
                                   className="h-4 w-4 rounded border-gray-300  text-primary focus:text-primary"
-                                  onChange={()=>{console.log(option.value);}}
+                                  onChange={(e)=>{handleFilter(e,section,option)}}
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}

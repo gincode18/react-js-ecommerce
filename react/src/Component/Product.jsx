@@ -2,9 +2,9 @@ import React from "react";
 
 function Product({ title, image, price, rating }) {
   return (
-    <div className="  max-h-[800px]  w-full m-6 flex justify-center items-center">
-      <div className="  min-h-[700px] min-w-[100px]  bg-base-300  rounded-3xl w-full bg-opacity-50  backdrop-filter  backdrop-blur-lg"></div>
-      <div className="  absolute  bg-base-100 bg-opacity-40 backdrop-filter backdrop-blur-lg card w-96 rounded-3xl h-[500px] shadow-2xl shadow-primary hover:shadow-secondary   hover:image-full focus:image-full   group hover:text-inherit   ">
+    <div className="  md:right-0  max-h-[800px]  w-full m-6 flex justify-center items-center">
+      <div className="  relative min-h-[700px] min-w-[100px]    bg-base-100  rounded-3xl w-full  md:bg-opacity-20  sm:bg-opacity-0  md:backdrop-filter md:ackdrop-blur-3xl "></div>
+      <div className="   sm:-translate-x-[6.5%]  md:translate-x-0 absolute  bg-base-100 md:bg-opacity-40 sm:bg-opacity-20 backdrop-filter backdrop-blur-sm card w-96 rounded-3xl h-[500px] shadow-2xl shadow-primary hover:shadow-secondary   hover:image-full focus:image-full   group hover:text-inherit   ">
         <figure className=" ">
           <img className="  " src={image} alt={title} />
         </figure>
