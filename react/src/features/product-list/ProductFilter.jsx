@@ -8,15 +8,16 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductAsync ,fetchProductAsyncFilter} from '../product-list/productSlice';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchProductAsync,
+  fetchProductAsyncFilter,
+  fetchProductAsyncSort,
+} from "../product-list/productSlice";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
+  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
 ];
 
 const filters = [
@@ -102,17 +103,20 @@ function classNames(...classes) {
 }
 
 export default function ProductFilter({ children }) {
-  const handleFilter=(e,section,option)=>{
-    const x={...filterdata,[section.id]:section.id==='brand'?option.label:option.value}
-    setfilterdata(x)
-  }
-  const dispatch=useDispatch()
-  const [filterdata, setfilterdata] = useState({})
+  const handleFilter = (e, section, option) => {
+    const x = {
+      ...filterdata,
+      [section.id]: section.id === "brand" ? option.label : option.value,
+    };
+    setfilterdata(x);
+  };
+  const dispatch = useDispatch();
+  const [filterdata, setfilterdata] = useState({});
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-useEffect(()=>{
-  console.log(filterdata);
-  dispatch(fetchProductAsyncFilter(filterdata))
-},[filterdata])
+  useEffect(() => {
+    console.log(filterdata);
+    dispatch(fetchProductAsyncFilter(filterdata));
+  }, [filterdata]);
   return (
     <div className="">
       <div>
@@ -204,7 +208,9 @@ useEffect(()=>{
                                       type="checkbox"
                                       defaultChecked={option.checked}
                                       className="h-4 w-4 rounded border-gray-300  text-primary focus:text-primary"
-                                      onChange={(e)=>{handleFilter(e,section,option)}}
+                                      onChange={(e) => {
+                                        handleFilter(e, section, option);
+                                      }}
                                       value={section.checked}
                                     />
                                     <label
@@ -269,7 +275,18 @@ useEffect(()=>{
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm"
                               )}
-                              onClick={ ()=>{console.log(option.name);}}
+                              onClick={() => {
+                                console.log({
+                                  sort: option.sort,
+                                  order: option.order,
+                                });
+                                dispatch(
+                                  fetchProductAsyncSort({
+                                    sort: option.sort,
+                                    order: option.order,
+                                  })
+                                );
+                              }}
                             >
                               {option.name}
                             </a>
@@ -351,7 +368,9 @@ useEffect(()=>{
                                   type="checkbox"
                                   defaultChecked={option.checked}
                                   className="h-4 w-4 rounded border-gray-300  text-primary focus:text-primary"
-                                  onChange={(e)=>{handleFilter(e,section,option)}}
+                                  onChange={(e) => {
+                                    handleFilter(e, section, option);
+                                  }}
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}
