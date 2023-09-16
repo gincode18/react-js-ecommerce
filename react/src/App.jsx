@@ -6,11 +6,11 @@ import Home from "./Component/Home";
 import { Routes } from "react-router-dom";
 import Checkoutold from "./Component/Checkoutold";
 import { Space, Alert } from "antd";
-import Login from "./Component/Login";
+import Login from "./features/auth/Login";
 import ProductsList from "./features/product-list/ProductsList";
 import Navbar from "./features/navbar/Navbar";
 import ProductFilter from "./features/product-list/ProductFilter";
-import SignUP from "./Component/SignUp";
+import SignUP from "./features/auth/SignUp";
 import Cart from "./features/cart/Cart";
 import ThemeChanger from "./Component/ThemeChanger";
 import Checkout from "./Component/Checkout";
@@ -51,7 +51,7 @@ const themes = [
 ];
 
 function App() {
-  const [theme, settheme] = useState(themes[20]);
+  const [theme, settheme] = useState(themes[23]);
   useEffect(() => {
     console.log(theme);
   }, [theme]);
@@ -143,7 +143,7 @@ function App() {
           path="/products/:id"
           element={
             <div className="app bg-gradient-to-tr  from-accent  via-primary to-secondary">
-              <Navbar> </Navbar>
+              <Navbar>
               <label
                 className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
                 onClick={() => {
@@ -159,7 +159,9 @@ function App() {
                 <ThemeChanger></ThemeChanger>
               </label>
               <Prodductdetails></Prodductdetails>
+              </Navbar>
             </div>
+            
           }
         />
         <Route
