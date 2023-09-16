@@ -34,5 +34,11 @@ export async function fetchProductBySort(query,page) {
   console.log(data);
   return data;
 }
-
+export async function fetchProductid(id) {
+  const response = await fetch(`http://localhost:3000/products/${id}`);
+  const data = await response.json();
+  console.log('all data');
+  console.log(data);
+  return data;
+}
 

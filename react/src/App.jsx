@@ -14,6 +14,7 @@ import SignUP from "./Component/SignUp";
 import Cart from "./features/cart/Cart";
 import ThemeChanger from "./Component/ThemeChanger";
 import Checkout from "./Component/Checkout";
+import Prodductdetails from "./features/product-list/Prodductdetails";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -115,12 +116,49 @@ function App() {
           }
         />
         <Route
-          path="/test"
+          path="/products"
           element={
             <div className="app">
               <Navbar>
+                <label
+                  className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
+                  onClick={() => {
+                    const randomNumber = Math.floor(Math.random() * 27) + 1;
+                    console.log(randomNumber);
+                    settheme(themes[randomNumber]);
+                  }}
+                >
+                  {/* this hidden checkbox controls the state */}
+                  <input type="checkbox" className=" hidden" />
+
+                  {/* sun icon */}
+                  <ThemeChanger></ThemeChanger>
+                </label>
                 <ProductFilter></ProductFilter>
               </Navbar>
+            </div>
+          }
+        />
+        <Route
+          path="/products/:id"
+          element={
+            <div className="app bg-gradient-to-tr  from-accent  via-primary to-secondary">
+              <Navbar> </Navbar>
+              <label
+                className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
+                onClick={() => {
+                  const randomNumber = Math.floor(Math.random() * 27) + 1;
+                  console.log(randomNumber);
+                  settheme(themes[randomNumber]);
+                }}
+              >
+                {/* this hidden checkbox controls the state */}
+                <input type="checkbox" className=" hidden" />
+
+                {/* sun icon */}
+                <ThemeChanger></ThemeChanger>
+              </label>
+              <Prodductdetails></Prodductdetails>
             </div>
           }
         />

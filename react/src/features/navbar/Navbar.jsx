@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../../Component/Logo";
 import { theme } from "antd";
 import { Link } from "react-router-dom";
+import User from './download.jpeg'
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
@@ -114,7 +115,7 @@ export default function Navbar({ children }) {
                             <span className="sr-only">Open user menu</span>
                             <div className="avatar">
                               <div className="w-12 rounded-full ring ring-primary hover:ring-secondary ring-offset-base-100 ring-offset-2">
-                                <img src={user.imageUrl} />
+                                <img src={User} />
                               </div>
                             </div>
                           </Menu.Button>
