@@ -13,7 +13,9 @@ import {
   fetchProductAsync,
   fetchProductAsyncFilter,
   fetchProductAsyncSort,
+  fetchProductPage,
 } from "../product-list/productSlice";
+import ProductList from "./ProductsList";
 
 const sortOptions = [
   { name: "Price: Low to High", sort: "price", order: "asc", current: false },
@@ -108,14 +110,20 @@ export default function ProductFilter({ children }) {
       ...filterdata,
       [section.id]: section.id === "brand" ? option.label : option.value,
     };
+    console.log("x");
+    console.log(x);
     setfilterdata(x);
   };
   const dispatch = useDispatch();
   const [filterdata, setfilterdata] = useState({});
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const ProductPage = useSelector((state) => state.product.page);
   useEffect(() => {
+    console.log("filterdata");
     console.log(filterdata);
-    dispatch(fetchProductAsyncFilter(filterdata));
+    if (filterdata.category || filterdata.brand) {
+      dispatch(fetchProductAsyncFilter(filterdata, ProductPage));
+    }
   }, [filterdata]);
   return (
     <div className="">
@@ -389,7 +397,9 @@ export default function ProductFilter({ children }) {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3">{children}</div>
+              <div className="lg:col-span-3">
+                <ProductList></ProductList>
+              </div>
             </div>
           </section>
         </main>

@@ -3,28 +3,35 @@ import { fetchProduct, fetchProductByFilter, fetchProductBySort } from './produc
 
 const initialState = {
   products: [],
+  page:1,
   status: 'idle',
 };
 export const fetchProductAsync = createAsyncThunk(
   'product/fetchAllProducts',
-  async () => {
-    const response = await fetchProduct();
+  async (page) => {
+    const response = await fetchProduct(page);
     return response;
   }
 );
 
 export const fetchProductAsyncFilter = createAsyncThunk(
   'product/fetchAllProductsFilter',
-  async (filter) => {
-    const response = await fetchProductByFilter(filter);
+  async (filter,page) => {
+    const response = await fetchProductByFilter(filter,page);
     return response;
   }
 );
 export const fetchProductAsyncSort = createAsyncThunk(
   'product/fetchAllProductsSort',
-  async (filter) => {
-    const response = await fetchProductBySort(filter);
+  async (filter,page) => {
+    const response = await fetchProductBySort(filter,page);
     return response;
+  }
+);
+export const fetchProductPage = createAsyncThunk(
+  'product/fetchAllProductPage',
+  async (page) => {
+    return page;
   }
 );
 
@@ -58,6 +65,13 @@ export const productlistSlice = createSlice({
       .addCase(fetchProductAsyncSort.fulfilled, (state, action) => {
         state.status = 'idle';
         state.products = action.payload;
+      })
+      .addCase(fetchProductPage.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchProductPage.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.page = action.payload;
       });
       
   },

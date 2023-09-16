@@ -119,9 +119,7 @@ function App() {
           element={
             <div className="app">
               <Navbar>
-                <ProductFilter>
-                  <ProductsList></ProductsList>
-                </ProductFilter>
+                <ProductFilter></ProductFilter>
               </Navbar>
             </div>
           }
@@ -130,7 +128,7 @@ function App() {
           path="/test2"
           element={
             <div className="app">
-             <Checkout></Checkout>
+              <Checkout></Checkout>
             </div>
           }
         />

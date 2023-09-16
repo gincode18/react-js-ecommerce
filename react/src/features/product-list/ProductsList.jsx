@@ -1,28 +1,27 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductAsync } from './productSlice';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductAsync, fetchProductPage } from "./productSlice";
 
 export default function ProductList() {
   const dispatch = useDispatch();
   const productState = useSelector((state) => state.product);
   const newproducts = productState.products;
   const status = useSelector((state) => state.product.status);
-
+  const [page, setPage] = useState(1);
   useEffect(() => {
-      dispatch(fetchProductAsync());
-  }, []);
+    dispatch(fetchProductAsync(page));
+  }, [page]);
   useEffect(() => {
- console.log(newproducts);
+    console.log(newproducts);
   }, [newproducts]);
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return <div>Loading...</div>;
   }
   return (
-  
     <div className="">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 flex flex-col justify-center items-center">
+        <h2 className="text-2xl font-bold tracking-tight text-white item -translate-x-[80%] mb-16">
           Customers also purchased
         </h2>
 
@@ -54,6 +53,31 @@ export default function ProductList() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="join mt-16">
+          <button
+            className="join-item btn"
+            onClick={() => {
+              if (page > 1) {
+                dispatch(fetchProductPage(page - 1));
+                setPage(page - 1);
+              }
+            }}
+          >
+            «
+          </button>
+          <button className="join-item btn">Page {page}</button>
+          <button
+            className="join-item btn"
+            onClick={() => {
+              if (page < 5) {
+                dispatch(fetchProductPage(page + 1));
+                setPage(page + 1);
+              }
+            }}
+          >
+            »
+          </button>
         </div>
       </div>
     </div>
