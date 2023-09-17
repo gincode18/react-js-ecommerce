@@ -1,42 +1,52 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { CreateUserAPI} from './authAPI';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { CreateUserAPI, CheckUserAPI } from "./authAPI";
 
 const initialState = {
   users: [],
-  status: 'idle',
+  status: "idle",
 };
 export const CreateUser = createAsyncThunk(
-  'product/CreateUser',
+  "product/CreateUser",
   async (data) => {
     const response = await CreateUserAPI(data);
+    console.log(response);
+    return response;
+  }
+);
+export const CheckUser = createAsyncThunk(
+  "product/CheckUser",
+  async (data) => {
+    const response = await CheckUserAPI(data);
+    console.log(response);
     return response;
   }
 );
 
-
 export const userSlice = createSlice({
-  name: 'users',
+  name: "users",
   initialState,
   reducers: {
     increment: (state) => {
-      state.products=state.products
+      state.products = state.products;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(CreateUser.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(CreateUser.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = "idle";
+        state.users = action.payload;
+      })
+      .addCase(CheckUser.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(CheckUser.fulfilled, (state, action) => {
+        state.status = "idle";
         state.users = action.payload;
       });
-      
   },
 });
-
-
-
-
 
 export default userSlice.reducer;

@@ -17,14 +17,16 @@ export const fetchProductAsync = createAsyncThunk(
 
 export const fetchProductAsyncFilter = createAsyncThunk(
   'product/fetchAllProductsFilter',
-  async (filter,page) => {
+  async ({ filter, page }) => {
     const response = await fetchProductByFilter(filter,page);
     return response;
   }
 );
 export const fetchProductAsyncSort = createAsyncThunk(
   'product/fetchAllProductsSort',
-  async (filter,page) => {
+  async ({ filter, page }) => {
+    console.log(filter);
+    console.log(page);
     const response = await fetchProductBySort(filter,page);
     return response;
   }

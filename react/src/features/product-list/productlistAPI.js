@@ -1,5 +1,5 @@
 export async function fetchProduct(page) {
-  const response = await fetch(`http://localhost:3000/products?_page=${page}&_limit=20`);
+  const response = await fetch(` http://192.168.29.119:5174/products?_page=${page}&_limit=20`);
   const data = await response.json();
   console.log('all data');
   console.log(data);
@@ -13,8 +13,8 @@ export async function fetchProductByFilter(query,page) {
     
   }
   console.log(querystring);
-  console.log(`http://localhost:3000/products?${querystring}_page=${page}&_limit=20`);
-  const response = await fetch(`http://localhost:3000/products?${querystring}_page=1&_limit=20`);
+  console.log(` http://192.168.29.119:5174/products?${querystring}_page=${page}&_limit=20`);
+  const response = await fetch(` http://192.168.29.119:5174/products?${querystring}_page=${page}&_limit=20`);
   const data = await response.json();
   console.log('filter');
   console.log(data);
@@ -27,15 +27,16 @@ export async function fetchProductBySort(query,page) {
   }
   console.log('sort');
   console.log(querystring);
-  console.log(`http://localhost:3000/products?${querystring}_page=${page}&_limit=10`);
-  const response = await fetch(`http://localhost:3000/products?${querystring}_page=${page}&_limit=20`);
+  console.log(page);
+  console.log(` http://192.168.29.119:5174/products?${querystring}_page=${page}&_limit=10`);
+  const response = await fetch(` http://192.168.29.119:5174/products?${querystring}_page=${page}&_limit=20`);
   const data = await response.json();
   console.log('filter');
   console.log(data);
   return data;
 }
 export async function fetchProductid(id) {
-  const response = await fetch(`http://localhost:3000/products/${id}`);
+  const response = await fetch(` http://192.168.29.119:5174/products/${id}`);
   const data = await response.json();
   console.log('all data');
   console.log(data);

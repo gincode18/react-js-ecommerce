@@ -132,7 +132,7 @@ export default function ProductFilter({ children }) {
     console.log("filterdata");
     console.log(filterdata);
     if (filterdata.category || filterdata.brand) {
-      dispatch(fetchProductAsyncFilter(filterdata, ProductPage));
+      dispatch(fetchProductAsyncFilter({filter:filterdata,page: ProductPage}));
     }
   }, [filterdata]);
   const ProductList = (
@@ -368,16 +368,13 @@ export default function ProductFilter({ children }) {
                                 "block px-4 py-2 text-sm"
                               )}
                               onClick={() => {
-                                console.log({
+                                const x = {
                                   sort: option.sort,
                                   order: option.order,
-                                });
-                                dispatch(
-                                  fetchProductAsyncSort({
-                                    sort: option.sort,
-                                    order: option.order,
-                                  })
-                                );
+                                };
+                                console.log(x);
+                                console.log(ProductPage);
+                                dispatch(fetchProductAsyncSort({filter:x,page: ProductPage}));
                               }}
                             >
                               {option.name}
@@ -481,9 +478,7 @@ export default function ProductFilter({ children }) {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3">
-                {ProductList}
-              </div>
+              <div className="lg:col-span-3">{ProductList}</div>
             </div>
           </section>
         </main>

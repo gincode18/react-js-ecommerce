@@ -15,6 +15,7 @@ import Cart from "./features/cart/Cart";
 import ThemeChanger from "./Component/ThemeChanger";
 import Checkout from "./Component/Checkout";
 import Prodductdetails from "./features/product-list/Prodductdetails";
+import Security from "./features/auth/Security";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -91,14 +92,7 @@ function App() {
             </div>
           }
         />
-        <Route
-          path="/login"
-          element={
-            <div className="app bg-neutral">
-              <Login></Login>
-            </div>
-          }
-        />
+        <Route path="/login" element={<Login></Login>} />
         <Route
           path="/signin"
           element={
@@ -118,7 +112,33 @@ function App() {
         <Route
           path="/products"
           element={
-            <div className="app">
+
+              <div className="app">
+                <Navbar>
+                  <label
+                    className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
+                    onClick={() => {
+                      const randomNumber = Math.floor(Math.random() * 27) + 1;
+                      console.log(randomNumber);
+                      settheme(themes[randomNumber]);
+                    }}
+                  >
+                    {/* this hidden checkbox controls the state */}
+                    <input type="checkbox" className=" hidden" />
+
+                    {/* sun icon */}
+                    <ThemeChanger></ThemeChanger>
+                  </label>
+                  <ProductFilter></ProductFilter>
+                </Navbar>
+              </div>
+
+          }
+        />
+        <Route
+          path="/products/:id"
+          element={
+            <div className="app bg-gradient-to-tr  from-accent  via-primary to-secondary">
               <Navbar>
                 <label
                   className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
@@ -134,34 +154,9 @@ function App() {
                   {/* sun icon */}
                   <ThemeChanger></ThemeChanger>
                 </label>
-                <ProductFilter></ProductFilter>
+                <Prodductdetails></Prodductdetails>
               </Navbar>
             </div>
-          }
-        />
-        <Route
-          path="/products/:id"
-          element={
-            <div className="app bg-gradient-to-tr  from-accent  via-primary to-secondary">
-              <Navbar>
-              <label
-                className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
-                onClick={() => {
-                  const randomNumber = Math.floor(Math.random() * 27) + 1;
-                  console.log(randomNumber);
-                  settheme(themes[randomNumber]);
-                }}
-              >
-                {/* this hidden checkbox controls the state */}
-                <input type="checkbox" className=" hidden" />
-
-                {/* sun icon */}
-                <ThemeChanger></ThemeChanger>
-              </label>
-              <Prodductdetails></Prodductdetails>
-              </Navbar>
-            </div>
-            
           }
         />
         <Route
