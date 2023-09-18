@@ -16,6 +16,7 @@ import {
   fetchProductPage,
 } from "../product-list/productSlice";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const sortOptions = [
   { name: "Price: Low to High", sort: "price", order: "asc", current: false },
@@ -132,7 +133,9 @@ export default function ProductFilter({ children }) {
     console.log("filterdata");
     console.log(filterdata);
     if (filterdata.category || filterdata.brand) {
-      dispatch(fetchProductAsyncFilter({filter:filterdata,page: ProductPage}));
+      dispatch(
+        fetchProductAsyncFilter({ filter: filterdata, page: ProductPage })
+      );
     }
   }, [filterdata]);
   const ProductList = (
@@ -164,10 +167,12 @@ export default function ProductFilter({ children }) {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm  text-white">
-                      <a href={product.thumbnail}>
-                        <span aria-hidden="true" className=" " />
-                        {product.title}
-                      </a>
+                      <Link to={`/products/${product.id}`}>
+                        <a onClick={() => {}}>
+                          <span aria-hidden="true" className=" " />
+                          {product.title}
+                        </a>
+                      </Link>
                     </h3>
                     <p className="mt-1 text-sm text-white">
                       {product.discountPercentage}
@@ -374,7 +379,12 @@ export default function ProductFilter({ children }) {
                                 };
                                 console.log(x);
                                 console.log(ProductPage);
-                                dispatch(fetchProductAsyncSort({filter:x,page: ProductPage}));
+                                dispatch(
+                                  fetchProductAsyncSort({
+                                    filter: x,
+                                    page: ProductPage,
+                                  })
+                                );
                               }}
                             >
                               {option.name}

@@ -8,22 +8,25 @@ import {
   fetchProductPage,
   fetchProductId,
 } from "../product-list/productSlice";
+import { AddToCart } from "../cart/cartSlice";
+import { CheckUser } from "../auth/authSlice";
 import { useParams } from "react-router-dom";
 import "./test.css";
 function Prodductdetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const {selectedproduct ,status} = useSelector((state) => state.product);
+  const { selectedproduct, status } = useSelector((state) => state.product);
+  const { users } = useSelector((state) => state.users);
   useEffect(() => {
     dispatch(fetchProductId(id));
-  },[]);
+    dispatch(CheckUser(users[0]));
+  }, []);
   if (status === "loading") {
-    return(
-      <>
-      ....loading
-      </>
-    )
+    return <>....loading</>;
   }
+  const handleAddToCart = (product) => {
+    dispatch(AddToCart({product:product,quantity:1,users:users[0].id}));
+  };
 
   return (
     <div className=" py-6 sm:py-8 md:w-[80%] lg:py-12  bg-base-300  bg-opacity-50 lg:translate-x-[10%] sm:w-[90%] sm:translate-x-[5%]  backdrop-filter backdrop-blur-lg">
@@ -31,14 +34,14 @@ function Prodductdetails() {
         <div className="grid gap-8 md:grid-cols-2">
           <div className="space-y-4">
             <div className="relative overflow-hidden rounded-lg bg-primary">
-            {selectedproduct.images && selectedproduct.images.length > 0 && (
-              <img
-                src={selectedproduct.images[0]}
-                loading="lazy"
-                alt="Photo by Himanshu Dewangan"
-                className="h-full w-full object-cover object-center"
-              />
-            )}
+              {selectedproduct.images && selectedproduct.images.length > 0 && (
+                <img
+                  src={selectedproduct.images[0]}
+                  loading="lazy"
+                  alt="Photo by Himanshu Dewangan"
+                  className="h-full w-full object-cover object-center"
+                />
+              )}
 
               <span className="absolute left-0 top-0 rounded-br-lg bg-primary px-3 py-1.5 text-lg  font-bold uppercase tracking-wider  text-accent   shadow-lg">
                 sale
@@ -47,32 +50,36 @@ function Prodductdetails() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="overflow-hidden rounded-lg bg-primary">
-              {selectedproduct.images && selectedproduct.images.length > 0 && (
-              <img
-                src={selectedproduct.images[0]}
-                loading="lazy"
-                alt="Photo by Himanshu Dewangan"
-                className="h-full w-full object-cover object-center"
-              />
-            )}
+                {selectedproduct.images &&
+                  selectedproduct.images.length > 0 && (
+                    <img
+                      src={selectedproduct.images[0]}
+                      loading="lazy"
+                      alt="Photo by Himanshu Dewangan"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  )}
               </div>
 
               <div className="overflow-hidden rounded-lg bg-primary">
-              {selectedproduct.images && selectedproduct.images.length > 0 && (
-              <img
-                src={selectedproduct.images[0]}
-                loading="lazy"
-                alt="Photo by Himanshu Dewangan"
-                className="h-full w-full object-cover object-center"
-              />
-            )}
+                {selectedproduct.images &&
+                  selectedproduct.images.length > 0 && (
+                    <img
+                      src={selectedproduct.images[0]}
+                      loading="lazy"
+                      alt="Photo by Himanshu Dewangan"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  )}
               </div>
             </div>
           </div>
 
           <div className="md:py-8">
             <div className="mb-2 md:mb-3">
-              <span className="mb-0.5 inline-block ">{selectedproduct.brand}</span>
+              <span className="mb-0.5 inline-block ">
+                {selectedproduct.brand}
+              </span>
               <br></br>
               <h2 className=" font-bold  bg-gradient-to-t  text-3xl from-primary  to-secondary inline-block text-transparent bg-clip-text transition-colors  delay-75">
                 {selectedproduct.title}
@@ -206,6 +213,7 @@ function Prodductdetails() {
             <div className="flex gap-2.5">
               <a
                 href="#"
+                onClick={() => handleAddToCart({...selectedproduct,quantity:1,})}
                 className="inline-block flex-1 rounded-lg bg-primary px-8 py-3 text-center text-sm font-semibold  outline-none  transition duration-100 hover:bg-secondary focus-visible:ring active:bg-primary sm:flex-none md:text-base"
               >
                 Add to cart

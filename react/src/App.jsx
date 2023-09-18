@@ -16,6 +16,9 @@ import ThemeChanger from "./Component/ThemeChanger";
 import Checkout from "./Component/Checkout";
 import Prodductdetails from "./features/product-list/Prodductdetails";
 import Security from "./features/auth/Security";
+import { useDispatch, useSelector } from "react-redux";
+import { CheckUser } from "./features/auth/authSlice";
+import { GetCart } from "./features/cart/cartSlice";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -52,10 +55,17 @@ const themes = [
 ];
 
 function App() {
+  const { users } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   const [theme, settheme] = useState(themes[23]);
   useEffect(() => {
     console.log(theme);
   }, [theme]);
+  useEffect(() => {
+    if (users.length !== 0) {
+      dispatch(GetCart(users[0].id));
+    }
+  }, [users]);
   return (
     <div data-theme={theme} className="app  ease-out duration-700">
       <Routes>
@@ -104,15 +114,21 @@ function App() {
         <Route
           path="/cart"
           element={
-            <div className="app">
-              <Cart></Cart>
-            </div>
+            <Security>
+              {" "}
+              <div className="app">
+                <Navbar>
+                  <Cart></Cart>
+                </Navbar>
+              </div>
+            </Security>
           }
         />
         <Route
           path="/products"
           element={
-
+            <Security>
+              {" "}
               <div className="app">
                 <Navbar>
                   <label
@@ -132,31 +148,34 @@ function App() {
                   <ProductFilter></ProductFilter>
                 </Navbar>
               </div>
-
+            </Security>
           }
         />
         <Route
           path="/products/:id"
           element={
-            <div className="app bg-gradient-to-tr  from-accent  via-primary to-secondary">
-              <Navbar>
-                <label
-                  className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
-                  onClick={() => {
-                    const randomNumber = Math.floor(Math.random() * 27) + 1;
-                    console.log(randomNumber);
-                    settheme(themes[randomNumber]);
-                  }}
-                >
-                  {/* this hidden checkbox controls the state */}
-                  <input type="checkbox" className=" hidden" />
+            <Security>
+              {" "}
+              <div className="app bg-gradient-to-tr  from-accent  via-primary to-secondary">
+                <Navbar>
+                  <label
+                    className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
+                    onClick={() => {
+                      const randomNumber = Math.floor(Math.random() * 27) + 1;
+                      console.log(randomNumber);
+                      settheme(themes[randomNumber]);
+                    }}
+                  >
+                    {/* this hidden checkbox controls the state */}
+                    <input type="checkbox" className=" hidden" />
 
-                  {/* sun icon */}
-                  <ThemeChanger></ThemeChanger>
-                </label>
-                <Prodductdetails></Prodductdetails>
-              </Navbar>
-            </div>
+                    {/* sun icon */}
+                    <ThemeChanger></ThemeChanger>
+                  </label>
+                  <Prodductdetails></Prodductdetails>
+                </Navbar>
+              </div>
+            </Security>
           }
         />
         <Route
