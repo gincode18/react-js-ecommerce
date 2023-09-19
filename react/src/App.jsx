@@ -82,24 +82,27 @@ function App() {
         <Route
           path="/"
           element={
-            <div className="app">
-              <Navbar></Navbar>
-              <label
-                className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
-                onClick={() => {
-                  const randomNumber = Math.floor(Math.random() * 27) + 1;
-                  console.log(randomNumber);
-                  settheme(themes[randomNumber]);
-                }}
-              >
-                {/* this hidden checkbox controls the state */}
-                <input type="checkbox" className=" hidden" />
+            <Security>
+              {" "}
+              <div className="app">
+                <Navbar></Navbar>
+                <label
+                  className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
+                  onClick={() => {
+                    const randomNumber = Math.floor(Math.random() * 27) + 1;
+                    console.log(randomNumber);
+                    settheme(themes[randomNumber]);
+                  }}
+                >
+                  {/* this hidden checkbox controls the state */}
+                  <input type="checkbox" className=" hidden" />
 
-                {/* sun icon */}
-                <ThemeChanger></ThemeChanger>
-              </label>
-              <Home></Home>
-            </div>
+                  {/* sun icon */}
+                  <ThemeChanger></ThemeChanger>
+                </label>
+                <Home></Home>
+              </div>
+            </Security>
           }
         />
         <Route path="/login" element={<Login></Login>} />
@@ -181,9 +184,12 @@ function App() {
         <Route
           path="/test2"
           element={
-            <div className="app">
-              <Checkout></Checkout>
-            </div>
+            <Security>
+              {" "}
+              <div className="app">
+                <Checkout></Checkout>
+              </div>
+            </Security>
           }
         />
       </Routes>
