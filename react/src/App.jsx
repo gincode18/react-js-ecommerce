@@ -13,7 +13,7 @@ import ProductFilter from "./features/product-list/ProductFilter";
 import SignUP from "./features/auth/SignUp";
 import Cart from "./features/cart/Cart";
 import ThemeChanger from "./Component/ThemeChanger";
-import Checkout from "./Component/Checkout";
+import Checkout from "./features/cart/Checkout";
 import Prodductdetails from "./features/product-list/Prodductdetails";
 import Security from "./features/auth/Security";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,10 +72,13 @@ function App() {
         <Route
           path="/checkout"
           element={
-            <div className="app">
-              <Header />
-              <Checkoutold></Checkoutold>
-            </div>
+            <Security>
+              {" "}
+              <div className="app">
+                <Navbar></Navbar>
+                <Checkout></Checkout>
+              </div>
+            </Security>
           }
         ></Route>
 
@@ -177,17 +180,6 @@ function App() {
                   </label>
                   <Prodductdetails></Prodductdetails>
                 </Navbar>
-              </div>
-            </Security>
-          }
-        />
-        <Route
-          path="/test2"
-          element={
-            <Security>
-              {" "}
-              <div className="app">
-                <Checkout></Checkout>
               </div>
             </Security>
           }

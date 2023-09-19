@@ -22,3 +22,34 @@ export async function CheckUserAPI(user) {
   console.log(data);
   return data;
 }
+
+export async function UpdateUserAPI(user) {
+    const url = `http://192.168.29.119:5174/user/${user.users[0].id}`;
+    console.log(url);
+    console.log(user);
+    const requestOptions = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(user), 
+    };
+  
+    try {
+      const response = await fetch(url, requestOptions);
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json(); // Parse the response as JSON
+  
+      console.log('PATCH request successful:', data);
+      // Handle the response data as needed
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle errors here
+    }
+}
+
+

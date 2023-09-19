@@ -3,16 +3,20 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { GetCart } from "./cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-
-
+import { Link } from "react-router-dom";
 
 export default function Example() {
-  const  newproducts  = useSelector((state) => state.cart.items);
+  const newproducts = useSelector((state) => state.cart.items);
   const [open, setOpen] = useState(true);
+  const [total, settotal] = useState();
   useEffect(() => {
     console.log(newproducts);
-  })
+    var sum = newproducts.reduce((acc, item) => {
+      return acc + item.product.price;
+    }, 0);
+    console.log(sum);
+    settotal(sum);
+  }, [newproducts]);
 
   return (
     <div className="">
@@ -40,11 +44,15 @@ export default function Example() {
                       <div>
                         <div className="flex justify-between text-base font-medium ">
                           <h3>
-                            <a href={product.product.thumbnail}>{product.product.title}</a>
+                            <a href={product.product.thumbnail}>
+                              {product.product.title}
+                            </a>
                           </h3>
-                          <p className="ml-4">{product.product.price}</p>
+                          <p className="ml-4">${product.product.price}</p>
                         </div>
-                        <p className="mt-1 text-sm  ">{product.product.description}</p>
+                        <p className="mt-1 text-sm  ">
+                          {product.product.description}
+                        </p>
                       </div>
                       <div className="flex flex-1 items-end justify-between text-sm">
                         <p className="">Qty {product.quantity}</p>
@@ -69,18 +77,17 @@ export default function Example() {
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <div className="flex justify-between text-base font-medium ">
             <p>Subtotal</p>
-            <p>$262.00</p>
+            <p>${total}</p>
           </div>
           <p className="mt-0.5 text-sm  ">
             Shipping and taxes calculated at checkout.
           </p>
           <div className="mt-6">
-            <a
-              href="#"
-              className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-            >
-              Checkout
-            </a>
+            <Link to="/checkout">
+              <a className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                Checkout
+              </a>
+            </Link>
           </div>
         </div>
       </div>
