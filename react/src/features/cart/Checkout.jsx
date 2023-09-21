@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useEffect } from "react";
-import { UpdateUser,CheckUser } from "../auth/authSlice";
+import { UpdateUser, CheckUser } from "../auth/authSlice";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -73,14 +73,17 @@ function Checkout() {
                 className="   px-5 py-12 mt-12"
                 noValidate
                 onSubmit={handleSubmit((data) => {
-                  console.log(data);
+                  console.log({
+                    ...user,
+                    addresses: [...user.users[0].addresses, data],
+                  });
                   dispatch(
                     UpdateUser({
                       ...user,
-                      addresses: [...user.addresses, data],
+                      addresses: [...user.users[0].addresses, data],
                     })
                   );
-                  dispatch(CheckUser(user.users[0]))
+                  dispatch(CheckUser(user.users[0]));
                   reset();
                 })}
               >
@@ -287,7 +290,7 @@ function Checkout() {
                   Choose from Existing addresses
                 </p>
                 <ul>
-                  {user.addresses.map((address, index) => (
+                  {user.users[0].addresses&&user.users[0].addresses.map((address, index) => (
                     <li
                       key={index}
                       className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"

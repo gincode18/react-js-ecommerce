@@ -1846,37 +1846,37 @@
       "password": "Vishal@1234",
       "confirmpassword": "Vishal@1234",
       "id": 1,
-      "users": [
-        {
-          "email": "vishalkamboj9211@gmail.com",
-          "password": "Vishal@1234",
-          "confirmpassword": "Vishal@1234",
-          "id": 1,
-          "users": [
-            {
-              "email": "vishalkamboj9211@gmail.com",
-              "password": "Vishal@1234",
-              "confirmpassword": "Vishal@1234",
-              "id": 1
-            }
-          ],
-          "addresses": [
-            {
-              "name": "VIshal Kamboj2",
-              "email": "vishalkamboj9211@gmail.com",
-              "phone": "9729233981",
-              "street": "5B Sanjay Vihar Colony",
-              "city": "Yamuna Nagar",
-              "state": "Haryana",
-              "pinCode": "135001"
-            }
-          ],
-          "status": "idle"
-        }
-      ],
+      "status": "idle",
       "addresses": [
         {
-          "name": "VIshal ",
+          "name": "VIshal Kamboj",
+          "email": "vishalkamboj9211@gmail.com",
+          "phone": "9729233981",
+          "street": "5B Sanjay Vihar Colony",
+          "city": "Yamuna Nagar",
+          "state": "Haryana",
+          "pinCode": "135001"
+        },
+        {
+          "name": "BOIHIUGUIG",
+          "email": "vishalkamboj9211@gmail.com",
+          "phone": "9729233981",
+          "street": "5B Sanjay Vihar Colony",
+          "city": "Yamuna Nagar",
+          "state": "Haryana",
+          "pinCode": "135001"
+        },
+        {
+          "name": "VIshal Kambodscdscj",
+          "email": "sdcsdc",
+          "phone": "dscsdcsdcds",
+          "street": "5B Sanjay Vihar Colony",
+          "city": "Yamuna Nagar",
+          "state": "Haryana",
+          "pinCode": "135001"
+        },
+        {
+          "name": "VIshal Kambojwedwe",
           "email": "vishalkamboj9211@gmail.com",
           "phone": "9729233981",
           "street": "5B Sanjay Vihar Colony",
@@ -1884,8 +1884,7 @@
           "state": "Haryana",
           "pinCode": "135001"
         }
-      ],
-      "status": "idle"
+      ]
     }
   ],
   "cart": [

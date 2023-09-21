@@ -3,7 +3,6 @@ import { CreateUserAPI, CheckUserAPI ,UpdateUserAPI} from "./authAPI";
 
 const initialState = {
   users: [],
-  addresses:[],
   status: "idle",
 };
 export const CreateUser = createAsyncThunk(
@@ -27,7 +26,7 @@ export const UpdateUser = createAsyncThunk(
   async (data) => {
     const response = await UpdateUserAPI(data);
     console.log(response);
-    return response;
+    return response.addresses;
   }
 );
 
@@ -54,7 +53,16 @@ export const userSlice = createSlice({
       .addCase(CheckUser.fulfilled, (state, action) => {
         state.status = "idle";
         state.users = action.payload;
-      });
+
+      })
+      .addCase(UpdateUser.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(UpdateUser.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.users = action.payload;
+      })
+
   },
 });
 
