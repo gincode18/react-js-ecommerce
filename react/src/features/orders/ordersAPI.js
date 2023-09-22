@@ -20,7 +20,7 @@ export async function CreateOrdersAPI(orders) {
   console.log(data);
   return data;
 }
-GetOrdersAPI(1);
+
 
 
 

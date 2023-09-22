@@ -14,8 +14,10 @@ export async function AddToCartAPI(cart) {
   return data;
 }
 export async function FetchCartAPI(userid) {
-  const url = " http://192.168.29.119:5174/cart?${userid}";
+  const url = `http://192.168.29.119:5174/cart?users=${userid}`;
+  console.log(url);
   const response = await fetch(url);
+  console.log(userid);
   const data = await response.json();
   console.log("all to cart");
   console.log(data);
