@@ -1890,7 +1890,18 @@
       "email": "vishalkamboj92211@gmail.com",
       "password": "Vishal@1234",
       "confirmpassword": "Vishal@1234",
-      "id": 2
+      "id": 2,
+      "addresses": [
+        {
+          "name": "VIshal Kamboj",
+          "email": "vishalkamboj9211@gmail.com",
+          "phone": "9729233981",
+          "street": "5B Sanjay Vihar Colony",
+          "city": "Yamuna Nagar",
+          "state": "Haryana",
+          "pinCode": "135001"
+        }
+      ]
     }
   ],
   "cart": [

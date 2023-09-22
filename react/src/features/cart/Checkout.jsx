@@ -78,12 +78,12 @@ function Checkout() {
                 onSubmit={handleSubmit((data) => {
                   console.log({
                     ...user,
-                    addresses: [...user.users[0].addresses, data],
+                    addresses: user.users[0].addresses?[...user.users[0].addresses, data]:[data],
                   });
                   dispatch(
                     UpdateUser({
                       ...user,
-                      addresses: [...user.users[0].addresses, data],
+                      addresses: user.users[0].addresses?[...user.users[0].addresses, data]:[data],
                     })
                   );
                   dispatch(CheckUser(user.users[0]));
@@ -294,7 +294,7 @@ function Checkout() {
                   Choose from Existing addresses
                 </p>
                 <ul>
-                  {user.users[0].addresses[0] &&
+                  {user.users[0].addresses &&
                     user.users[0].addresses.map((address, index) => (
                       <li
                         key={index}
