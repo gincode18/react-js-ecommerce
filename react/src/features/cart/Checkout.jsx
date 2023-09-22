@@ -58,8 +58,6 @@ function Checkout() {
       console.log(order);
       dispatch(GetOrders(user.users[0].id));
       dispatch(GetOrders(user.users[0].id));
-    } else {
-      alert("Enter Address and Payment method");
     }
   };
 
@@ -78,12 +76,16 @@ function Checkout() {
                 onSubmit={handleSubmit((data) => {
                   console.log({
                     ...user,
-                    addresses: user.users[0].addresses?[...user.users[0].addresses, data]:[data],
+                    addresses: user.users[0].addresses
+                      ? [...user.users[0].addresses, data]
+                      : [data],
                   });
                   dispatch(
                     UpdateUser({
                       ...user,
-                      addresses: user.users[0].addresses?[...user.users[0].addresses, data]:[data],
+                      addresses: user.users[0].addresses
+                        ? [...user.users[0].addresses, data]
+                        : [data],
                     })
                   );
                   dispatch(CheckUser(user.users[0]));
@@ -460,12 +462,42 @@ function Checkout() {
                     Shipping and taxes calculated at checkout.
                   </p>
                   <div className="mt-6">
-                    <div
-                      onClick={handleOrder}
-                      className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    <button
+                      className="btn bg-primary"
+                      onClick={() => {
+                        document.getElementById("my_modal_4").showModal();
+                        handleOrder();
+                      }}
                     >
-                      Order Now
-                    </div>
+                      Order NOW
+                    </button>
+                    {selectedAddress && paymentMethod ? (
+                      <dialog id="my_modal_4" className="modal">
+                        <div className="modal-box w-11/12 max-w-5xl">
+                          <h3 className="font-bold text-lg">Order Placed</h3>
+                          <p className="py-4">Your Order is Place :)</p>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              {/* if there is a button, it will close the modal */}
+                              <button className="btn bg-primary">Close</button>
+                            </form>
+                          </div>
+                        </div>
+                      </dialog>
+                    ) : (
+                      <dialog id="my_modal_4" className="modal">
+                        <div className="modal-box w-11/12 max-w-5xl">
+                          <h3 className="font-bold text-lg">Please Enter Address and Payment method</h3>
+                          <p className="py-4"></p>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              {/* if there is a button, it will close the modal */}
+                              <button className="btn bg-primary">Close</button>
+                            </form>
+                          </div>
+                        </div>
+                      </dialog>
+                    )}
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm     ">
                     <p>
