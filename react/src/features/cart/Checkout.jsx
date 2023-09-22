@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useEffect } from "react";
 import { UpdateUser, CheckUser } from "../auth/authSlice";
+import { GetOrders, CreateOrders } from "../orders/ordersSlice";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function Checkout() {
     formState: { errors },
   } = useForm();
 
-  const user = useSelector((state) => state.users) || {addresses: []};
+  const user = useSelector((state) => state.users) || { addresses: [] };
   const items = useSelector((state) => state.cart.items);
   const status = useSelector((state) => state.cart.status);
 
@@ -34,7 +35,7 @@ function Checkout() {
 
   const handleAddress = (e) => {
     console.log(e.target.value);
-    setSelectedAddress(user.addresses[e.target.value]);
+    setSelectedAddress(user.users[0].addresses[e.target.value]);
   };
 
   const handlePayment = (e) => {
@@ -48,13 +49,15 @@ function Checkout() {
         items,
         totalAmount,
         totalItems,
-        user: user.id,
+        user: user.users[0].id,
         paymentMethod,
         selectedAddress,
         status: "pending", // other status can be delivered, received.
       };
-
-      // need to redirect from here to a new page of order success.
+      dispatch(CreateOrders(order));
+      console.log(order);
+      dispatch(GetOrders(user.users[0].id));
+      dispatch(GetOrders(user.users[0].id));
     } else {
       alert("Enter Address and Payment method");
     }
@@ -291,7 +294,7 @@ function Checkout() {
                   Choose from Existing addresses
                 </p>
                 <ul>
-                  {user.users[0].addresses[0]&&
+                  {user.users[0].addresses[0] &&
                     user.users[0].addresses.map((address, index) => (
                       <li
                         key={index}
