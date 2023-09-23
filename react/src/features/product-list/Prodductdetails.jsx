@@ -53,7 +53,7 @@ function Prodductdetails() {
                 {selectedproduct.images &&
                   selectedproduct.images.length > 0 && (
                     <img
-                      src={selectedproduct.images[0]}
+                      src={selectedproduct.images[1]}
                       loading="lazy"
                       alt="Photo by Himanshu Dewangan"
                       className="h-full w-full object-cover object-center"
@@ -65,7 +65,7 @@ function Prodductdetails() {
                 {selectedproduct.images &&
                   selectedproduct.images.length > 0 && (
                     <img
-                      src={selectedproduct.images[0]}
+                      src={selectedproduct.images[2]}
                       loading="lazy"
                       alt="Photo by Himanshu Dewangan"
                       className="h-full w-full object-cover object-center"
