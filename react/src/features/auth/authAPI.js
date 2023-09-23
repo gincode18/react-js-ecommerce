@@ -53,4 +53,8 @@ export async function UpdateUserAPI(user) {
     // Handle errors here
   }
 }
+export async function SignoutUserAPI() {
+
+  return {data:"success"};
+}
 

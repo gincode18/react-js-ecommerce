@@ -8,6 +8,7 @@ import User from "./download.jpeg";
 import { GetCart } from "../cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { SignOutUser } from "../auth/authSlice";
 
 const user = {
   name: "Tom Cook",
@@ -22,8 +23,8 @@ const navigation = [
   { name: "Reports", href: "#", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "orders", href: "/orders" },
+  { name: "Your Profile", href: "/profile" },
+  { name: "Your Orders", href: "/orders" },
   { name: "Sign out", href: "#" },
 ];
 
@@ -149,6 +150,9 @@ export default function Navbar({ children }) {
                                       active ? "  bg-secondary" : "",
                                       "block px-4 py-2 text-sm "
                                     )}
+                                    onClick={()=>{if(item.name==="Sign out"){
+                                      dispatch(SignOutUser())
+                                    }}}
                                   >
                                     {item.name}
                                   </Link>
@@ -230,8 +234,8 @@ export default function Navbar({ children }) {
                     {userNavigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
-                        as="a"
-                        href={item.href}
+                        as="Link"
+                        to={item.href}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
