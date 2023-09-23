@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { UpdateUser, CheckUser } from "../auth/authSlice";
 import { GetOrders, CreateOrders } from "../orders/ordersSlice";
+import { ClearCart, GetCart } from "./cartSlice";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -43,22 +44,22 @@ function Checkout() {
     setPaymentMethod(e.target.value);
   };
 
-  const handleOrder = (e) => {
-    if (selectedAddress && paymentMethod) {
-      const order = {
-        items,
-        totalAmount,
-        totalItems,
-        user: user.users[0].id,
-        paymentMethod,
-        selectedAddress,
-        status: "pending", // other status can be delivered, received.
-      };
-      dispatch(CreateOrders(order));
-      console.log(order);
-      dispatch(GetOrders(user.users[0].id));
-      dispatch(GetOrders(user.users[0].id));
-    }
+  const handleOrder = async (e) => {
+    const order = {
+      items,
+      totalAmount,
+      totalItems,
+      user: user.users[0].id,
+      paymentMethod,
+      selectedAddress,
+      status: "pending", // other status can be delivered, received.
+    };
+    await dispatch(CreateOrders(order));
+    console.log(order);
+    await dispatch(GetOrders(user.users[0].id));
+    await dispatch(GetOrders(user.users[0].id));
+    await dispatch(ClearCart(user.users[0].id));
+    
   };
 
   return (
@@ -464,40 +465,45 @@ function Checkout() {
                   <div className="mt-6">
                     <button
                       className="btn bg-primary"
-                      onClick={() => {
-                        document.getElementById("my_modal_4").showModal();
-                        handleOrder();
+                      onClick={async () => {
+                        if (selectedAddress && paymentMethod&&totalItems!==0) {
+                          await handleOrder();
+                          document.getElementById("my_modal").showModal();
+                        } else {
+                          document.getElementById("error_modal").showModal();
+                        }
                       }}
                     >
                       Order NOW
                     </button>
-                    {selectedAddress && paymentMethod ? (
-                      <dialog id="my_modal_4" className="modal">
-                        <div className="modal-box w-11/12 max-w-5xl">
-                          <h3 className="font-bold text-lg">Order Placed</h3>
-                          <p className="py-4">Your Order is Place :)</p>
-                          <div className="modal-action">
-                            <form method="dialog">
-                              {/* if there is a button, it will close the modal */}
-                              <button className="btn bg-primary">Close</button>
-                            </form>
-                          </div>
+
+                    <dialog id="my_modal" className="modal">
+                      <div className="modal-box w-11/12 max-w-5xl">
+                        <h3 className="font-bold text-lg">Order Placed</h3>
+                        <p className="py-4">Your Order is Place :)</p>
+                        <div className="modal-action">
+                          <form method="dialog">
+                            {/* if there is a button, it will close the modal */}
+                            <button className="btn bg-primary">Close</button>
+                          </form>
                         </div>
-                      </dialog>
-                    ) : (
-                      <dialog id="my_modal_4" className="modal">
-                        <div className="modal-box w-11/12 max-w-5xl">
-                          <h3 className="font-bold text-lg">Please Enter Address and Payment method</h3>
-                          <p className="py-4"></p>
-                          <div className="modal-action">
-                            <form method="dialog">
-                              {/* if there is a button, it will close the modal */}
-                              <button className="btn bg-primary">Close</button>
-                            </form>
-                          </div>
+                      </div>
+                    </dialog>
+
+                    <dialog id="error_modal" className="modal">
+                      <div className="modal-box w-11/12 max-w-5xl">
+                        <h3 className="font-bold text-lg">
+                          Please Enter Address and Payment method and add some items to cart
+                        </h3>
+                        <p className="py-4"></p>
+                        <div className="modal-action">
+                          <form method="dialog">
+                            {/* if there is a button, it will close the modal */}
+                            <button className="btn bg-primary">Close</button>
+                          </form>
                         </div>
-                      </dialog>
-                    )}
+                      </div>
+                    </dialog>
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm     ">
                     <p>

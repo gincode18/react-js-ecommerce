@@ -19,6 +19,7 @@ import Security from "./features/auth/Security";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckUser } from "./features/auth/authSlice";
 import { GetCart } from "./features/cart/cartSlice";
+import OrderPage from "./features/orders/OrdersPage";
 const onClose = (e) => {
   console.log(e, "I was closed.");
 };
@@ -152,6 +153,32 @@ function App() {
                     <ThemeChanger></ThemeChanger>
                   </label>
                   <ProductFilter></ProductFilter>
+                </Navbar>
+              </div>
+            </Security>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <Security>
+              <div className="app">
+                <Navbar>
+                  <label
+                    className="swap swap-rotate  z-50 right-3 top-24 fixed rounded-lg bg-black pr-10 opacity-75 translate-y-44"
+                    onClick={() => {
+                      const randomNumber = Math.floor(Math.random() * 27) + 1;
+                      console.log(randomNumber);
+                      settheme(themes[randomNumber]);
+                    }}
+                  >
+                    {/* this hidden checkbox controls the state */}
+                    <input type="checkbox" className=" hidden" />
+
+                    {/* sun icon */}
+                    <ThemeChanger></ThemeChanger>
+                  </label>
+                  <OrderPage></OrderPage>
                 </Navbar>
               </div>
             </Security>
