@@ -1,6 +1,6 @@
 const { Order } = require("../model/Orders");
 const { Product } = require("../model/Product");
-const { User } = require("../model/User");
+const User = require("../model/User");
 
 exports.fetchOrdersByUser = async (req, res) => {
   const { id } = req.params;
@@ -14,6 +14,7 @@ exports.fetchOrdersByUser = async (req, res) => {
 };
 
 exports.createOrder = async (req, res) => {
+  console.log(req.body);
   const order = new Order(req.body);
   // here we have to update stocks;
 
@@ -26,10 +27,9 @@ exports.createOrder = async (req, res) => {
 
   try {
     const doc = await order.save();
-    const user = await User.findById(order.user);
-
     res.status(201).json(doc);
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   }
 };
