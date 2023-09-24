@@ -26,7 +26,6 @@ export async function CheckUserAPI(user) {
 export async function UpdateUserAPI(user) {
   const url = `http://192.168.29.119:5174/user/${user.users[0].id}`;
   console.log(url);
-  console.log("YA PADH LODU");
   console.log(user);
   const requestOptions = {
     method: "PATCH",

@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Product =require('./routes/Product.js') // Check the path to your Product module
+const User =require('./routes/User.js') 
 
 const app = express();
 
@@ -20,7 +21,8 @@ db();
 
 // Make sure to use "app", not "server"
 app.use(express.json());
-app.use("/products", Product); // Use the imported router
+app.use("/products", Product);
+app.use('/users',User); // Use the imported router
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
