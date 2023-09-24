@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Product =require('./routes/Product.js') // Check the path to your Product module
 const User =require('./routes/User.js') 
-
+const Cart =require('./routes/Cart.js')
 const app = express();
 
 const db = async () => {
@@ -22,8 +22,8 @@ db();
 // Make sure to use "app", not "server"
 app.use(express.json());
 app.use("/products", Product);
-app.use('/users',User); // Use the imported router
-
+app.use('/users',User);
+app.use('/cart',Cart);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
