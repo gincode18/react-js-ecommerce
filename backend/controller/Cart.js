@@ -3,7 +3,7 @@ const { Cart } = require('../model/Cart');
 exports.fetchCartByUser = async (req, res) => {
   const { id } = req.user;
   try {
-    const cartItems = await Cart.find({ user: id }).populate('product');
+    const cartItems = await Cart.find({ user: id }).populate('products.product');
 
     res.status(200).json(cartItems);
   } catch (err) {
@@ -15,7 +15,7 @@ exports.addToCart = async (req, res) => {
   const cart = new Cart({...req.body});
   try {
     const doc = await cart.save();
-    const result = await doc.populate('product');
+    const result = await doc.populate('products.product');
     const result2 = await result.populate('user');
     res.status(201).json(result2);
   } catch (err) {
@@ -39,7 +39,7 @@ exports.updateCart = async (req, res) => {
     const cart = await Cart.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    const result = await cart.populate('product');
+    const result = await cart.populate('products.product');
 
     res.status(200).json(result);
   } catch (err) {
