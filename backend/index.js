@@ -4,7 +4,9 @@ const Product =require('./routes/Product.js') // Check the path to your Product 
 const User =require('./routes/User.js') 
 const Cart =require('./routes/Cart.js')
 const Orders =require('./routes/Orders.js')
+var cors = require('cors')
 const app = express();
+app.use(cors())
 
 const db = async () => {
   try {
@@ -23,7 +25,7 @@ db();
 // Make sure to use "app", not "server"
 app.use(express.json());
 app.use("/products", Product);
-app.use('/users',User);
+app.use('/user',User);
 app.use('/cart',Cart);
 app.use('/orders',Orders);
 const PORT = process.env.PORT || 3000;

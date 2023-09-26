@@ -6,25 +6,25 @@ export async function CreateUserAPI(user) {
     },
     body: JSON.stringify(user),
   };
-  const url = " http://192.168.29.119:5174/user";
+  const url = " http://localhost:3000/user";
   const response = await fetch(url, requestOptions);
   const data = await response.json();
-  console.log("all data");
+  console.log("User Data");
   console.log(data);
   return data;
 }
 
 export async function CheckUserAPI(user) {
-  const url = " http://192.168.29.119:5174/user?email=" + user.email;
+  const url = " http://localhost:3000/user?email=" + user.email;
   const response = await fetch(url);
   const data = await response.json();
-  console.log("all data");
+  console.log("User data");
   console.log(data);
   return data;
 }
 
 export async function UpdateUserAPI(user) {
-  const url = `http://192.168.29.119:5174/user/${user.users[0].id}`;
+  const url = `http://localhost:3000/user/${user.users[0].id}`;
   console.log(url);
   console.log(user);
   const requestOptions = {

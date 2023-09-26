@@ -17,9 +17,8 @@ exports.fetchAllProducts = async (req, res) => {
   // sort = {_sort:"price",_order="desc"}
   // pagination = {_page:1,_limit=10}
   let condition = {};
-  if (!req.query.admin) {
-    condition.deleted = { $ne: true };
-  }
+  console.log(req.query);
+ 
 
   let query = Product.find(condition);
   let totalProductsQuery = Product.find(condition);

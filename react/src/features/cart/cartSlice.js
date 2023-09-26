@@ -8,6 +8,8 @@ const initialState = {
 export const AddToCart = createAsyncThunk(
   "product/AddTOCart",
   async (data) => {
+    console.log("add to cart");
+    console.log(data);
     const response = await AddToCartAPI(data);
     console.log(response);
     return response;
@@ -17,8 +19,8 @@ export const GetCart = createAsyncThunk(
   "product/GetCart",
   async (data) => {
     const response = await FetchCartAPI(data);
-    console.log(response);
-    return response;
+    console.log(response[0].products);
+    return response[0].products;
   }
 );
 export const ClearCart = createAsyncThunk(

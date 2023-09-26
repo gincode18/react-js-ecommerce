@@ -9,7 +9,7 @@ const orderSchema = new Schema(
   {
     items: { type: [Schema.Types.Mixed], required: true },
     totalAmount: { type: Number },
-    totalItems: { type: Number },
+    totalItems: { type: String},
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     paymentMethod: { type: String, required: true, enum: paymentMethods },
     paymentStatus: { type: String, default: 'pending' },

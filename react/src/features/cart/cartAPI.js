@@ -6,7 +6,7 @@ export async function AddToCartAPI(cart) {
     },
     body: JSON.stringify(cart),
   };
-  const url = " http://192.168.29.119:5174/cart";
+  const url = " http://localhost:3000/cart";
   const response = await fetch(url, requestOptions);
   const data = await response.json();
   console.log("add to cart");
@@ -14,7 +14,7 @@ export async function AddToCartAPI(cart) {
   return data;
 }
 export async function FetchCartAPI(userid) {
-  const url = `http://192.168.29.119:5174/cart?users=${userid}`;
+  const url = `http://localhost:3000/cart/${userid}`;
   console.log(url);
   const response = await fetch(url);
   console.log(userid);
@@ -27,7 +27,7 @@ export async function ClearCartAPI(userid) {
   const allitems = await FetchCartAPI(userid);
   console.log(allitems);
   allitems.forEach(async (item) => {
-    const url = `http://192.168.29.119:5174/cart/${item.id}`;
+    const url = `http://localhost:3000/cart/${item.id}`;
     console.log(url);
     const requestOptions = {
       method: "DELETE",
