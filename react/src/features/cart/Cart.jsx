@@ -30,14 +30,18 @@ export default function Example() {
           <div className="mt-8">
             <div className="flow-root">
               <ul role="list" className="-my-6 divide-y divide-gray-200">
-                {newproducts.map((product) => (
-                  <li key={product.product.id} className="flex py-6">
+                {newproducts.map((product,index) => (
+                  <li key={index} className="flex py-6">
                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                      <img
-                        src={product.product.images[0]}
-                        alt={product.product.title}
-                        className="h-full w-full object-cover object-center"
-                      />
+                      {product.product.images ? (
+                        <img
+                          src={product.product.images[0]}
+                          alt={product.product.title}
+                          className="h-full w-full object-cover object-center"
+                        />
+                      ) : (
+                        ""
+                      )}
                     </div>
 
                     <div className="ml-4 flex flex-1 flex-col">

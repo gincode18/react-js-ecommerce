@@ -42,6 +42,20 @@ export async function ClearCartAPI(userid) {
     console.log("delted cart");
     console.log(data);
   });
-
 }
+export async function RemoveFromCartAPI(itemid) {
+  const url = `http://localhost:3000/cart/${itemid}`;
+  console.log(url);
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  console.log(url);
+  const response = await fetch(url, requestOptions);
 
+  const data = await response.json();
+  console.log("delted cart");
+  console.log(data);
+}

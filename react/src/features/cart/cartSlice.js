@@ -12,7 +12,7 @@ export const AddToCart = createAsyncThunk(
     console.log(data);
     const response = await AddToCartAPI(data);
     console.log(response);
-    return response;
+    return response.products;
   }
 );
 export const GetCart = createAsyncThunk(
@@ -24,6 +24,12 @@ export const GetCart = createAsyncThunk(
   }
 );
 export const ClearCart = createAsyncThunk(
+  "product/CLearCart",
+  async (data) => {
+    const response =  ClearCartAPI(data);
+  }
+);
+export const RemoveFromCart = createAsyncThunk(
   "product/CLearCart",
   async (data) => {
     const response =  ClearCartAPI(data);
@@ -45,7 +51,7 @@ export const cartSlice = createSlice({
       })
       .addCase(AddToCart.fulfilled, (state, action) => {
         state.status = "idle";
-        state.items.push(action.payload) ;
+        state.items = action.payload;
       })
       .addCase(GetCart.pending, (state) => {
         state.status = "loading";

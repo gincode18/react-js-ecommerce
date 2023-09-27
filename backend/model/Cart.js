@@ -8,7 +8,7 @@ const cartSchema = new Schema({
       product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
     },
   ],
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true ,unique:true},
 });
 
 const virtual = cartSchema.virtual("id");

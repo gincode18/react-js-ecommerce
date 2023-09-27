@@ -20,7 +20,7 @@ exports.createOrder = async (req, res) => {
 
   for (let item of order.items) {
     let product = await Product.findOne({ _id: item.product.id });
-    product.$inc("stock", -1 * item.quantity);
+    product.$inc("stock", -1 );
     // for optimum performance we should make inventory outside of product.
     await product.save();
   }

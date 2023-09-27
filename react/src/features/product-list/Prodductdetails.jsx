@@ -17,6 +17,7 @@ function Prodductdetails() {
   const dispatch = useDispatch();
   const { selectedproduct, status } = useSelector((state) => state.product);
   const { users } = useSelector((state) => state.users);
+  const { items } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(fetchProductId(id));
     dispatch(CheckUser(users[0]));
@@ -25,7 +26,12 @@ function Prodductdetails() {
     return <>....loading</>;
   }
   const handleAddToCart = (product) => {
-    dispatch(AddToCart({product:product,quantity:1,users:users[0].id}));
+    const oldproductsid = items.map((item) => {
+      return { product: item.product.id };
+    });
+    console.log("YAAA PADHHHH +++++++++++");
+    console.log(oldproductsid);
+    dispatch(AddToCart({products:[...oldproductsid,{product:product.id}],quantity:1,user:users[0].id}));
   };
 
   return (

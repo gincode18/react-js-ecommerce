@@ -26,19 +26,25 @@ exports.fetchAllProducts = async (req, res) => {
   console.log(req.query.category);
 
   if (req.query.category) {
-    query = query.find({ category: { $in: req.query.category.split(",") } });
+    query = query.find({ category: { $in: req.query.category } });
     totalProductsQuery = totalProductsQuery.find({
-      category: { $in: req.query.category.split(",") },
+      category: { $in: req.query.category },
     });
   }
   if (req.query.brand) {
-    query = query.find({ brand: { $in: req.query.brand.split(",") } });
+    query = query.find({ brand: { $in: req.query.brand } });
     totalProductsQuery = totalProductsQuery.find({
-      brand: { $in: req.query.brand.split(",") },
+      brand: { $in: req.query.brand },
     });
   }
   if (req.query._sort && req.query._order) {
-    query = query.sort({ [req.query._sort]: req.query._order });
+    const _sort = [...req.query._sort]
+    const _order = [...req.query._order]
+    const last_sort = _sort.pop();
+    const last_order = _order.pop();
+    console.log(last_sort);
+    console.log(last_order);
+    query = query.sort({ [last_sort]: last_order });
   }
 
   const totalDocs = await totalProductsQuery.count().exec();
