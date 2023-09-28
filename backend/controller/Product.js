@@ -38,8 +38,12 @@ exports.fetchAllProducts = async (req, res) => {
     });
   }
   if (req.query._sort && req.query._order) {
-    const _sort = [...req.query._sort]
-    const _order = [...req.query._order]
+    const first_sort = [ 'p', 'r', 'i', 'c', 'e' ];
+    const first_order = [ 'a', 's', 'c', 'd' ];
+    const _sort = [...req.query._sort][0]===first_sort[0]?[req.query._sort]:[...req.query._sort];
+    console.log(_sort);
+    const _order = [...req.query._order][0]===first_order[0]?[req.query._order]:[...req.query._order];
+    console.log(_order);
     const last_sort = _sort.pop();
     const last_order = _order.pop();
     console.log(last_sort);
