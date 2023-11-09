@@ -8,7 +8,7 @@ function OrderPage() {
   const orders = useSelector((state) => state.orders.orders);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(GetOrders(user.users[0].id));
+    dispatch(GetOrders(user.users.id));
     console.log(orders);
   }, []);
   return (

@@ -7,20 +7,43 @@ import { useDispatch } from "react-redux";
 import { CheckUser } from "./authSlice";
 import { Link, useNavigate } from "react-router-dom";
 
+
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  async function LoginUserAPI(user) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials:"include",
+      body: JSON.stringify(user),
+    };
+    const url = " http://localhost:3000/auth/login";
+    const response = await fetch(url, requestOptions);
+    const data = await response.json();
+    console.log("User Data");
+    console.log(data);
+    return data;
+  }
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit =async (data) => {
+    console.log("ya DEkh------");
+    console.log(data);
+   const logininfo= await LoginUserAPI(data);
+   console.log(logininfo);
     dispatch(CheckUser(data));
     navigate("/products");
     
   };
+
   return (
     <div className=" h-[1200px] bg-neutral">
       <div className="flex flex-row items-center justify-center">
@@ -29,6 +52,7 @@ const Login = () => {
           animationData={loginanimation}
           loop={true}
         />
+      
         <div className="flex min-h-full flex-col justify-center px-6 py-12  flex-grow">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col justify-center items-center">
             <Logo className=""></Logo>

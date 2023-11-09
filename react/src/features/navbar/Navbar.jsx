@@ -38,7 +38,7 @@ export default function Navbar({ children }) {
   const data = useSelector((state) => state.cart.items);
   useEffect(() => {
     if (users.length !== 0) {
-      dispatch(GetCart(users[0].id));
+      dispatch(GetCart());
     }
   }, [users]);
 

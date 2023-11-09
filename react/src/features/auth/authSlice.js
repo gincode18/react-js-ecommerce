@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CreateUserAPI, CheckUserAPI ,UpdateUserAPI,SignoutUserAPI} from "./authAPI";
+import { CreateUserAPI, CheckUserAPI ,UpdateUserAPI,SignoutUserAPI,checkAuthAPI} from "./authAPI";
 const initialState = {
   users: [],
+  loggedinUser:false,
   status: "idle",
 };
 export const CreateUser = createAsyncThunk(
-  "product/CreateUser",
+  "user/CreateUser",
   async (data) => {
     const response = await CreateUserAPI(data);
     console.log(response);
@@ -13,16 +14,27 @@ export const CreateUser = createAsyncThunk(
   }
 );
 export const CheckUser = createAsyncThunk(
-  "product/CheckUser",
+  "user/CheckUser",
   async (data) => {
     const response = await CheckUserAPI(data);
     console.log("check user+++++++++++++++++++++++++++++++++++++");
     return response;
   }
 );
-export const UpdateUser = createAsyncThunk(
-  "product/UpdateUser",
+export const CheckAuth = createAsyncThunk(
+  "user/CheckAuth",
   async (data) => {
+    const response = await checkAuthAPI(data);
+    console.log("check auth+++++++++++++++++++++++++++++++++++++");
+    return response;
+  }
+);
+export const UpdateUser = createAsyncThunk(
+  "user/UpdateUser",
+  async (data) => {
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
     const response = await UpdateUserAPI(data);
     console.log("update user+++++++++++++++++++++++++++++++++++++");
     console.log(response);
@@ -30,7 +42,7 @@ export const UpdateUser = createAsyncThunk(
   }
 );
 export const SignOutUser = createAsyncThunk(
-  "product/SignOutUser",
+  "user/SignOutUser",
   async () => {
     const response = await SignoutUserAPI();
     console.log(response);
@@ -43,7 +55,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     increment: (state) => {
-      state.products = state.products;
+      state.users = state.users;
     },
   },
   extraReducers: (builder) => {
@@ -61,6 +73,14 @@ export const userSlice = createSlice({
       .addCase(CheckUser.fulfilled, (state, action) => {
         state.status = "idle";
         state.users = action.payload;
+
+      })
+      .addCase(CheckAuth.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(CheckAuth.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.loggedinUser = true;
 
       })
       .addCase(UpdateUser.pending, (state) => {

@@ -13,9 +13,10 @@ const addressSchema = new Schema({
 
 const userSchema = new Schema({
     email: String,
-    password: String,
+    password: { type: Buffer, required: true },
     confirmpassword: String,
     status: String,
+    salt: Buffer,
     addresses: [addressSchema], // Array of addresses using the addressSchema
 });
 const virtualId  = userSchema.virtual('id');

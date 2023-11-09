@@ -1,19 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './Style/index.css';
-import './index.css';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from "react-router-dom";
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./Style/index.css";
+import "./index.css";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
+      <Provider store={store}>
+        <CookiesProvider defaultSetOptions={{ path: "/" }}>
+          <App />
+        </CookiesProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

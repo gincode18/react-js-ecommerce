@@ -20,7 +20,7 @@ function Prodductdetails() {
   const { items } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(fetchProductId(id));
-    dispatch(CheckUser(users[0]));
+    dispatch(CheckUser());
   }, []);
   if (status === "loading") {
     return <>....loading</>;
@@ -31,7 +31,7 @@ function Prodductdetails() {
     });
     console.log("YAAA PADHHHH +++++++++++");
     console.log(oldproductsid);
-    dispatch(AddToCart({products:[...oldproductsid,{product:product.id}],quantity:1,user:users[0].id}));
+    dispatch(AddToCart({products:[...oldproductsid,{product:product.id}],quantity:1,user:users.id}));
   };
 
   return (

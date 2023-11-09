@@ -14,28 +14,56 @@ export async function CreateUserAPI(user) {
   return data;
 }
 
-export async function CheckUserAPI(user) {
-  const url = " http://localhost:3000/user?email=" + user.email;
-  const response = await fetch(url);
+export async function CheckUserAPI() {
+  const url = " http://localhost:3000/user";
+  const response = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+  });
   const data = await response.json();
   console.log("User data");
   console.log(data);
   return data;
 }
+export function checkAuthAPI() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch("http://localhost:3000/auth/check", {
+        method: "GET",
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Auth API====================================");
+        console.log(data);
+        console.log("====================================");
+        resolve(data.id);
+      } else {
+        const error = await response.text();
+        reject(error);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
 
 export async function UpdateUserAPI(user) {
-  const url = `http://localhost:3000/user/${user.users[0].id}`;
-  console.log(url);
-  console.log(user);
-  const requestOptions = {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({addresses:user.addresses}),
-  };
-
   try {
+    console.log("====================================");
+    console.log("Update");
+    console.log("====================================");
+    const url = `http://localhost:3000/user`;
+    console.log(url);
+    console.log(user);
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ addresses: user.addresses }),
+    };
     const response = await fetch(url, requestOptions);
 
     if (!response.ok) {
@@ -53,7 +81,5 @@ export async function UpdateUserAPI(user) {
   }
 }
 export async function SignoutUserAPI() {
-
-  return {data:"success"};
+  return { data: "success" };
 }
-

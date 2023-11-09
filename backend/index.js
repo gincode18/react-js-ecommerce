@@ -1,19 +1,62 @@
 const express = require("express");
+const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const cookieParser = require('cookie-parser');
+const { isAuth, sanitizeUser, cookieExtractor } = require('./services/common');
 const mongoose = require("mongoose");
-const Product =require('./routes/Product.js') // Check the path to your Product module
-const User =require('./routes/User.js') 
-const Cart =require('./routes/Cart.js')
-const Orders =require('./routes/Orders.js')
-var cors = require('cors')
+const Product = require("./routes/Product.js"); // Check the path to your Product module
+const User = require("./routes/User.js");
+const Cart = require("./routes/Cart.js");
+const Orders = require("./routes/Orders.js");
+const Auth=require("./routes/Auth")
+const  UserModel  = require("./model/User");
+const path = require('path');
 const app = express();
-app.use(cors())
+// JWT options
+
+const opts = {};
+opts.jwtFromRequest = cookieExtractor;
+opts.secretOrKey = "Secret";
+
+//middlewares
+
+// app.use(express.static(path.resolve(__dirname, "build")));
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "Secret",
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+  })
+);
+app.use(passport.authenticate("session"));
+// app.use(
+//   cors({
+//     exposedHeaders: ["X-Total-Count"],
+//   })
+// );
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods:"GET,POST,PUT,DELETE,PATCH",
+  credentials: true, // Enable cookies in the response
+}));
 
 const db = async () => {
   try {
-    await mongoose.connect("mongodb+srv://vishalkamboj9211:vishal1234@cluster0.tqdqd4j.mongodb.net/?retryWrites=true&w=majority", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      "mongodb+srv://vishalkamboj9211:vishal1234@cluster0.tqdqd4j.mongodb.net/?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
     console.log("DB is connected");
   } catch (error) {
     console.error("Error connecting to the database:", error);
@@ -22,12 +65,85 @@ const db = async () => {
 
 db();
 
-// Make sure to use "app", not "server"
+// Make sure to use "app", not "app"
 app.use(express.json());
-app.use("/products", Product);
-app.use('/user',User);
-app.use('/cart',Cart);
-app.use('/orders',Orders);
+app.use('/auth', Auth);
+app.use("/products" ,isAuth(),Product);
+app.use("/user",isAuth(), User);
+app.use("/cart",isAuth(), Cart);
+app.use("/orders", Orders);
+
+// Passport Strategies
+passport.use(
+  "local",
+  new LocalStrategy({ usernameField: "email" }, async function (
+    email,
+    password,
+    done
+  ) {
+    // by default passport uses username
+    console.log({ email, password });
+    try {
+      const user = await UserModel.findOne({ email: email });
+      console.log(email, password, user);
+      if (!user) {
+        return done(null, false, { message: "invalid credentials" }); // for safety
+      }
+      crypto.pbkdf2(
+        password,
+        user.salt,
+        310000,
+        32,
+        "sha256",
+        async function (err, hashedPassword) {
+          if (!crypto.timingSafeEqual(user.password, hashedPassword)) {
+            return done(null, false, { message: "invalid credentials" });
+          }
+          const token = jwt.sign(
+            sanitizeUser(user),
+            "Secret"
+          );
+          done(null, { id: user.id, role: user.role, token }); // this lines sends to serializer
+        }
+      );
+    } catch (err) {
+      done(err);
+    }
+  })
+);
+
+passport.use(
+  "jwt",
+  new JwtStrategy(opts, async function (jwt_payload, done) {
+    try {
+      const user = await UserModel.findById(jwt_payload.id);
+      if (user) {
+        return done(null, sanitizeUser(user)); // this calls serializer
+      } else {
+        return done(null, false);
+      }
+    } catch (err) {
+      return done(err, false);
+    }
+  })
+);
+
+// this creates session variable req.user on being called from callbacks
+passport.serializeUser(function (user, cb) {
+  process.nextTick(function () {
+    return cb(null, { id: user.id, role: user.role });
+  });
+});
+
+// this changes session variable req.user when called from authorized request
+
+passport.deserializeUser(function (user, cb) {
+  process.nextTick(function () {
+    return cb(null, user);
+  });
+});
+
+// Payments
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

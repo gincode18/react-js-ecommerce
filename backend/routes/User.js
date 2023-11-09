@@ -6,6 +6,6 @@ const User = express.Router();
 User.get("/:id", fetchUserById)
   .get("/", fetchUserByEmail)
   .post("/", createUser)
-  .patch("/:id", updateUser);
+  .patch("/", updateUser);
 
 module.exports = User;

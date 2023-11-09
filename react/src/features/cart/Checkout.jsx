@@ -36,7 +36,7 @@ function Checkout() {
 
   const handleAddress = (e) => {
     console.log(e.target.value);
-    setSelectedAddress(user.users[0].addresses[e.target.value]);
+    setSelectedAddress(user.users.addresses[e.target.value]);
   };
 
   const handlePayment = (e) => {
@@ -49,16 +49,16 @@ function Checkout() {
       items,
       totalAmount,
       totalItems,
-      user: user.users[0].id,
+      user: user.users.id,
       paymentMethod,
       selectedAddress,
       status: "pending", // other status can be delivered, received.
     };
     await dispatch(CreateOrders(order));
     console.log(order);
-    await dispatch(GetOrders(user.users[0].id));
-    await dispatch(GetOrders(user.users[0].id));
-    await dispatch(ClearCart(user.users[0].id));
+    await dispatch(GetOrders(user.users.id));
+    await dispatch(GetOrders(user.users.id));
+    await dispatch(ClearCart(user.users.id));
     
   };
 
@@ -77,21 +77,21 @@ function Checkout() {
                 onSubmit={handleSubmit((data) => {
                   console.log({
                     ...user,
-                    addresses: user.users[0].addresses
-                      ? [...user.users[0].addresses, data]
+                    addresses: user.users.addresses
+                      ? [...user.users.addresses, data]
                       : [data],
                   });
                   dispatch(
                     UpdateUser({
                       ...user,
-                      addresses: user.users[0].addresses
-                        ? [...user.users[0].addresses, data]
+                      addresses: user.users.addresses
+                        ? [...user.users.addresses, data]
                         : [data],
                     })
                   );
-                  dispatch(CheckUser(user.users[0]));
+                  dispatch(CheckUser());
                   reset();
-                  dispatch(CheckUser(user.users[0]));
+                  dispatch(CheckUser());
                 })}
               >
                 <div className="space-y-12">
@@ -297,8 +297,8 @@ function Checkout() {
                   Choose from Existing addresses
                 </p>
                 <ul>
-                  {user.users[0].addresses &&
-                    user.users[0].addresses.map((address, index) => (
+                  {user.users.addresses &&
+                    user.users.addresses.map((address, index) => (
                       <li
                         key={index}
                         className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"

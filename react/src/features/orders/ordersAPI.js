@@ -11,6 +11,7 @@ export async function CreateOrdersAPI(orders) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(orders),
   };
   const url = " http://localhost:3000/orders";

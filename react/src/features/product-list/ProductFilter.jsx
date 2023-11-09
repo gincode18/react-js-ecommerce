@@ -141,7 +141,7 @@ export default function ProductFilter({ children }) {
   const ProductList = (
     <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 flex flex-col justify-center items-center">
-        <h2 className="text-2xl font-bold tracking-tight text-white item -translate-x-[80%] mb-16">
+        <h2 className="text-2xl font-bold tracking-tight  item -translate-x-[80%] mb-16">
           Customers also purchased
         </h2>
 
@@ -161,12 +161,13 @@ export default function ProductFilter({ children }) {
                 <img
                   src={product.images[0]}
                   alt={product.title}
+                
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
                 {/* </div> */}
                 <div className="mt-4 flex justify-between">
                   <div>
-                    <h3 className="text-sm  text-white">
+                    <h3 className="text-sm  ">
                       <Link to={`/products/${product.id}`}>
                         <a onClick={() => {}}>
                           <span aria-hidden="true" className=" " />
@@ -174,11 +175,11 @@ export default function ProductFilter({ children }) {
                         </a>
                       </Link>
                     </h3>
-                    <p className="mt-1 text-sm text-white">
+                    <p className="mt-1 text-sm ">
                       {product.discountPercentage}
                     </p>
                   </div>
-                  <p className="text-sm font-medium text-white">
+                  <p className="text-sm font-medium ">
                     {product.price}
                   </p>
                 </div>
@@ -248,10 +249,10 @@ export default function ProductFilter({ children }) {
               >
                 <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto  py-4 pb-12 shadow-xl">
                   <div className="flex items-center justify-between px-4">
-                    <h2 className="text-lg font-medium text-white">Filters</h2>
+                    <h2 className="text-lg font-medium ">Filters</h2>
                     <button
                       type="button"
-                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md  p-2  text-white"
+                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md  p-2  "
                       onClick={() => setMobileFiltersOpen(false)}
                     >
                       <span className="sr-only">Close menu</span>
@@ -272,8 +273,8 @@ export default function ProductFilter({ children }) {
                         {({ open }) => (
                           <>
                             <h3 className="-mx-2 -my-3 flow-root">
-                              <Disclosure.Button className="flex w-full items-center justify-between  px-2 py-3 text-white hover:text-primary">
-                                <span className="font-medium  text-white">
+                              <Disclosure.Button className="flex w-full items-center justify-between  px-2 py-3  hover:text-primary">
+                                <span className="font-medium  ">
                                   {section.name}
                                 </span>
                                 <span className="ml-6 flex items-center">
@@ -312,7 +313,7 @@ export default function ProductFilter({ children }) {
                                     />
                                     <label
                                       htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                      className="ml-3 min-w-0 flex-1  text-white"
+                                      className="ml-3 min-w-0 flex-1  "
                                     >
                                       {option.label}
                                     </label>
@@ -333,17 +334,17 @@ export default function ProductFilter({ children }) {
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-            <h1 className="text-4xl font-bold tracking-tight text-white">
+            <h1 className="text-4xl font-bold tracking-tight ">
               New Arrivals
             </h1>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-white hover:text-primary">
+                  <Menu.Button className="group inline-flex justify-center text-sm font-medium  hover:text-primary">
                     Sort
                     <ChevronDownIcon
-                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0  text-white group-hover:text-primary"
+                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0   group-hover:text-primary"
                       aria-hidden="true"
                     />
                   </Menu.Button>
@@ -367,7 +368,7 @@ export default function ProductFilter({ children }) {
                               href={option.href}
                               className={classNames(
                                 option.current
-                                  ? "font-medium  text-white"
+                                  ? "font-medium  "
                                   : "text-secondary",
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm"
@@ -406,7 +407,7 @@ export default function ProductFilter({ children }) {
               </button>
               <button
                 type="button"
-                className="-m-2 ml-4 p-2 text-white hover:text-primary sm:ml-6 lg:hidden"
+                className="-m-2 ml-4 p-2  hover:text-primary sm:ml-6 lg:hidden"
                 onClick={() => setMobileFiltersOpen(true)}
               >
                 <span className="sr-only">Filters</span>
@@ -434,8 +435,8 @@ export default function ProductFilter({ children }) {
                     {({ open }) => (
                       <>
                         <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between  py-3 text-sm  text-white hover:text-primary">
-                            <span className="font-medium text-white">
+                          <Disclosure.Button className="flex w-full items-center justify-between  py-3 text-sm   hover:text-primary">
+                            <span className="font-medium ">
                               {section.name}
                             </span>
                             <span className="ml-6 flex items-center">
@@ -473,7 +474,7 @@ export default function ProductFilter({ children }) {
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-white"
+                                  className="ml-3 text-sm "
                                 >
                                   {option.label}
                                 </label>

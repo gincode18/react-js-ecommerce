@@ -4,6 +4,7 @@ export async function AddToCartAPI(cart) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(cart),
   };
   const url = " http://localhost:3000/cart";
@@ -13,11 +14,13 @@ export async function AddToCartAPI(cart) {
   console.log(data);
   return data;
 }
-export async function FetchCartAPI(userid) {
-  const url = `http://localhost:3000/cart/${userid}`;
+export async function FetchCartAPI() {
+  const url = `http://localhost:3000/cart`;
   console.log(url);
-  const response = await fetch(url);
-  console.log(userid);
+  const response = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+  });
   const data = await response.json();
   console.log("all to cart");
   console.log(data);
@@ -34,6 +37,7 @@ export async function ClearCartAPI(userid) {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     };
     console.log(url);
     const response = await fetch(url, requestOptions);
@@ -51,6 +55,7 @@ export async function RemoveFromCartAPI(itemid) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   };
   console.log(url);
   const response = await fetch(url, requestOptions);

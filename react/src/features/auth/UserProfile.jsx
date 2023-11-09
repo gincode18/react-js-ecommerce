@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.users.users[0]);
+  const user = useSelector((state) => state.users.users);
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
 
