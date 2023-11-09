@@ -10,6 +10,8 @@ async function CheckAuthAPI() {
     credentials: "include",
   });
 
+
+  
   if (!response.ok) {
     console.log("No Token");
     return null;
