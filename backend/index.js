@@ -14,6 +14,7 @@ const Product = require("./routes/Product.js"); // Check the path to your Produc
 const User = require("./routes/User.js");
 const Cart = require("./routes/Cart.js");
 const Orders = require("./routes/Orders.js");
+const Review = require("./routes/Review.js");
 const Auth=require("./routes/Auth")
 const  UserModel  = require("./model/User");
 const path = require('path');
@@ -42,11 +43,24 @@ app.use(passport.authenticate("session"));
 //   })
 // );
 
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods:"GET,POST,PUT,DELETE,PATCH",
-  credentials: true, // Enable cookies in the response
-}));
+const allowedOrigins = ['https://react-js-ecommerce-zeta.vercel.app', 'http://localhost:5173'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Check if the origin is allowed
+    if (allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,POST,PUT,DELETE,PATCH',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+
+
 
 const db = async () => {
   try {
@@ -71,7 +85,8 @@ app.use('/auth', Auth);
 app.use("/products" ,isAuth(),Product);
 app.use("/user",isAuth(), User);
 app.use("/cart",isAuth(), Cart);
-app.use("/orders", Orders);
+app.use("/orders",isAuth(), Orders);
+app.use("/review",isAuth(), Review);
 
 // Passport Strategies
 passport.use(
