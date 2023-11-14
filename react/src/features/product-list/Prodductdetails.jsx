@@ -11,6 +11,7 @@ import {
 import { AddToCart } from "../cart/cartSlice";
 import { CheckUser } from "../auth/authSlice";
 import { useParams } from "react-router-dom";
+import Review from "../review/Review";
 import "./test.css";
 function Prodductdetails() {
   const { id } = useParams();
@@ -249,20 +250,13 @@ function Prodductdetails() {
               </div>
 
               <p className="">
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text but is random or otherwise generated. It may be
-                used to display a sample of fonts or generate text for testing.
-                <br />
-                <br />
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text but is random or otherwise generated.
+             {selectedproduct.description}
               </p>
             </div>
           </div>
         </div>
       </div>
+      <Review></Review>
     </div>
   );
 }

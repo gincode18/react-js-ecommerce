@@ -4,6 +4,7 @@ export async function CreateUserAPI(user) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: 'include',
     body: JSON.stringify(user),
   };
   const url = " http://localhost:3000/user";
