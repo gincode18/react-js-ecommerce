@@ -1,23 +1,23 @@
 const express = require("express");
-const cors = require('cors');
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const cookieParser = require('cookie-parser');
-const { isAuth, sanitizeUser, cookieExtractor } = require('./services/common');
+const cors = require("cors");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const cookieParser = require("cookie-parser");
+const { isAuth, sanitizeUser, cookieExtractor } = require("./services/common");
 const mongoose = require("mongoose");
 const Product = require("./routes/Product.js"); // Check the path to your Product module
 const User = require("./routes/User.js");
 const Cart = require("./routes/Cart.js");
 const Orders = require("./routes/Orders.js");
 const Review = require("./routes/Review.js");
-const Auth=require("./routes/Auth")
-const  UserModel  = require("./model/User");
-const path = require('path');
+const Auth = require("./routes/Auth");
+const UserModel = require("./model/User");
+const path = require("path");
 const app = express();
 // JWT options
 
@@ -43,24 +43,39 @@ app.use(passport.authenticate("session"));
 //   })
 // );
 
-const allowedOrigins = ['https://react-js-ecommerce-zeta.vercel.app', 'http://localhost:5173'];
+const allowedOrigins = [
+  "https://react-js-ecommerce-zeta.vercel.app",
+  "http://localhost:5173",
+];
 const corsOptions = {
   origin: function (origin, callback) {
     // Check if the origin is allowed
     if (allowedOrigins.includes(origin)) {
       callback(null, origin);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: 'GET,POST,PUT,DELETE,PATCH',
+  methods: "GET,POST,PUT,DELETE,PATCH",
   credentials: true,
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
 
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
 
+//   res.header(
+//     "Access-Control-Allow-Methods",
+//     "GET, HEAD, OPTIONS, POST, PUT, DELETE"
+//   );
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
 
+//   next();
+// });
 
 const db = async () => {
   try {
@@ -81,12 +96,12 @@ db();
 
 // Make sure to use "app", not "app"
 app.use(express.json());
-app.use('/auth', Auth);
-app.use("/products" ,isAuth(),Product);
-app.use("/user",isAuth(), User);
-app.use("/cart",isAuth(), Cart);
-app.use("/orders",isAuth(), Orders);
-app.use("/review",isAuth(), Review);
+app.use("/auth", Auth);
+app.use("/products", isAuth(), Product);
+app.use("/user", isAuth(), User);
+app.use("/cart", isAuth(), Cart);
+app.use("/orders", isAuth(), Orders);
+app.use("/review", isAuth(), Review);
 
 // Passport Strategies
 passport.use(
@@ -114,10 +129,7 @@ passport.use(
           if (!crypto.timingSafeEqual(user.password, hashedPassword)) {
             return done(null, false, { message: "invalid credentials" });
           }
-          const token = jwt.sign(
-            sanitizeUser(user),
-            "Secret"
-          );
+          const token = jwt.sign(sanitizeUser(user), "Secret");
           done(null, { id: user.id, role: user.role, token }); // this lines sends to serializer
         }
       );
