@@ -43,10 +43,7 @@ app.use(passport.authenticate("session"));
 //   })
 // );
 
-const allowedOrigins = [
-  "https://react-js-ecommerce-zeta.vercel.app",
-  "http://localhost:5173",
-];
+const allowedOrigins = ["http://localhost:5173"];
 const corsOptions = {
   origin: function (origin, callback) {
     // Check if the origin is allowed
