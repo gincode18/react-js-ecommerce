@@ -137,7 +137,7 @@ function Review() {
         {review.map((item) => {
           return (
             <>
-              <div key={item.id} className="divide-y bg-secondary  rounded-3xl">
+              <div key={item.id} className="divide-y bg-secondary  rounded-3xl pl-8">
                 <div className="flex flex-col gap-3 py-4 md:py-8 ">
                   <div>
                     <span className="block text-sm font-bold">

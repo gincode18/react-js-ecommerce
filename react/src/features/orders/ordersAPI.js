@@ -1,7 +1,10 @@
 export async function GetOrdersAPI(id) {
-  const response = await fetch(` http://localhost:3000/orders/${id}`);
+  const response = await fetch(` http://localhost:3000/orders/${id}`, {
+    method: "GET",
+    credentials: "include",
+  });
   const data = await response.json();
-  console.log('all data');
+  console.log("all data");
   console.log(data);
   return data;
 }
@@ -21,8 +24,3 @@ export async function CreateOrdersAPI(orders) {
   console.log(data);
   return data;
 }
-
-
-
-
-

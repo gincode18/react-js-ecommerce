@@ -63,10 +63,10 @@ function App() {
   useEffect(() => {
     console.log(theme);
   }, [theme]);
-  useEffect(()=>{
-   dispatch(CheckUser()) 
-   dispatch(GetCart());
-  },[])
+  useEffect(() => {
+    dispatch(CheckUser());
+    dispatch(GetCart());
+  }, []);
   return (
     <div data-theme={theme} className="app  ease-out duration-700">
       <Routes>
@@ -86,8 +86,8 @@ function App() {
         <Route
           path="/"
           element={
-     
-           
+            <Security>
+              {" "}
               <div className="app">
                 <Navbar></Navbar>
                 <label
@@ -106,7 +106,7 @@ function App() {
                 </label>
                 <Home></Home>
               </div>
-     
+            </Security>
           }
         />
         <Route path="/login" element={<Login></Login>} />
