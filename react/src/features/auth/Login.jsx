@@ -21,7 +21,7 @@ const Login = () => {
       credentials:"include",
       body: JSON.stringify(user),
     };
-    const url = "https://ecommerce-0mfl.onrender.com/auth/login";
+    const url = "http://localhost:3000/auth/login";
     const response = await fetch(url, requestOptions);
     const data = await response.json();
     console.log("User Data");

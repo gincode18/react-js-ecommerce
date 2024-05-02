@@ -43,26 +43,26 @@ app.use(passport.authenticate("session"));
 //   })
 // );
 
-// const allowedOrigins = ["http://localhost:5173"];
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     // Check if the origin is allowed
-//     if (allowedOrigins.includes(origin)) {
-//       callback(null, origin);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   methods: "GET,POST,PUT,DELETE,PATCH",
-//   credentials: true,
-// };
+const allowedOrigins = ["http://localhost:5173"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Check if the origin is allowed
+    if (allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,POST,PUT,DELETE,PATCH",
+  credentials: true,
+};
 // const corsOptions = {
 //   origin: '*',
 //   methods: "GET,POST,PUT,DELETE,PATCH",
 //   credentials: true,
 // };
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -78,18 +78,18 @@ app.use(passport.authenticate("session"));
 
 //   next();
 // });
-app.use(function(req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "*");
-  const allowedOrigins = ['http://localhost:5173', 'http://gamebrag.onrender.com', 'https://gamebrag.onrender.com'];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-       res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-credentials", true);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
-  next();
-});
+// app.use(function(req, res, next) {
+//   // res.header("Access-Control-Allow-Origin", "*");
+//   const allowedOrigins = ['http://localhost:5173', 'http://gamebrag.onrender.com', 'https://gamebrag.onrender.com'];
+//   const origin = req.headers.origin;
+//   if (allowedOrigins.includes(origin)) {
+//        res.setHeader('Access-Control-Allow-Origin', origin);
+//   }
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//   res.header("Access-Control-Allow-credentials", true);
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
+//   next();
+// });
 const db = async () => {
   try {
     await mongoose.connect(
